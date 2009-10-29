@@ -1,0 +1,15 @@
+#summary Platform Requirements
+#labels Phase-Requirements
+
+= Introduction =
+
+In this page we define what we want to supply in this platform.
+
+
+= Details =
+
+We will separate the requirements to below parts:
+  * Platform Scalability  
+  * System Security
+
+--to be continued
