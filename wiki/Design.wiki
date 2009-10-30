@@ -4,6 +4,6 @@
 
 = Details =
 
-  [Architecture Design]
+  [ArchitectureDesign]
 
-  [Detail Design]
+  [DetailDesign]
