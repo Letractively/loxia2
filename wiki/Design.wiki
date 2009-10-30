@@ -1,0 +1,9 @@
+#summary Design for the platform
+#labels Phase-Design
+
+
+= Details =
+
+[Architecture Design]
+
+[Detail Design]
