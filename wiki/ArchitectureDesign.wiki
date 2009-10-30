@@ -1,0 +1,15 @@
+#summary Architecture Design
+#labels Phase-Design
+
+= Goals =
+
+//TODO
+
+
+= Main Technology/Framework involved =
+
+//TODO
+
+= UML Diagrams =
+
+//TODO
