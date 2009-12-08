@@ -7,5 +7,5 @@
 
 = Details =
 
-[Coredoc Generic Dao Implementation]
-[UIInterface Common Form Interface]
+ * [Coredoc Generic Dao Implementation]
+ * [UIInterface Common Form Interface]
