@@ -1,3 +1,4 @@
+<script type="text/javascript" src="scripts/shCore.js"></script>
 #summary Common Form Elements
 
 = Introduction =
