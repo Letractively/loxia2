@@ -1,5 +1,5 @@
 #summary Common Form Elements
-<script type="text/javascript" src="scripts/shCore.js"></script>
+`<script type="text/javascript" src="scripts/shCore.js"></script>`
 = Introduction =
 
 All form elements is implemented with JQuery 1.3 and followed the standard of JQueryUI.
