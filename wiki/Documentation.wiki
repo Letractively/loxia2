@@ -1,0 +1,10 @@
+#summary References for this architecture
+
+= Introduction =
+
+...
+
+
+= Details =
+
+[Coredoc Generic Dao Implementation]
