@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	<sec:http>		
+		<sec:intercept-url pattern="/login.jsp" filters="none"/>
+		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>	
+		<sec:form-login login-page="/login.jsp" default-target-url="/desktop.jsp"/>			
+		<sec:anonymous/>
+	</sec:http>	
+  	
+  	<sec:authentication-manager alias="authenticationManager"/>      
+  	
+  	<sec:authentication-provider user-service-ref="userDetailsService"/>
+
+	<!-- This bean is optional; it isn't used by any other bean as it only listens and logs -->
+	<bean class="org.springframework.security.event.authentication.LoggerListener" />
+</beans>
