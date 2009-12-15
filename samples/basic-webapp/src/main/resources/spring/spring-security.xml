@@ -7,7 +7,7 @@
 	<sec:http>		
 		<sec:intercept-url pattern="/login.jsp" filters="none"/>
 		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>	
-		<sec:form-login login-page="/login.jsp" default-target-url="/desktop.jsp"/>			
+		<sec:form-login login-page="/login.jsp" authentication-failure-url="/login.jsp" default-target-url="/desktop.jsp"/>			
 		<sec:anonymous/>
 	</sec:http>	
   	

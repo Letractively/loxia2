@@ -33,7 +33,7 @@
 	<filter>
 		<filter-name>sessionFilter</filter-name>
 		<filter-class>
-			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+			org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter
 		</filter-class>
 	</filter>
 	<filter-mapping>
