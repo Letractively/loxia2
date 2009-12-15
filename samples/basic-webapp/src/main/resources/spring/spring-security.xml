@@ -6,6 +6,9 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	<sec:http>		
 		<sec:intercept-url pattern="/login.jsp" filters="none"/>
+		<sec:intercept-url pattern="/css/**" filters="none"/>
+		<sec:intercept-url pattern="/images/**" filters="none"/>
+		<sec:intercept-url pattern="/scripts/**" filters="none"/>
 		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>	
 		<sec:form-login login-page="/login.jsp" authentication-failure-url="/login.jsp" default-target-url="/desktop.jsp"/>			
 		<sec:anonymous/>
