@@ -4,5 +4,57 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
     
 <struts>
-
+	<package name="default" extends="struts-default">
+		<result-types>
+			<result-type name="json" class="cn.benjamin.loxia.web.result.JsonResult"/>
+		</result-types>
+		<interceptors>
+			<interceptor name="exceptionEx" class="cn.benjamin.loxia.web.interceptor.ExceptionInterceptor"/>
+			<interceptor name="paramsEx" class="cn.benjamin.loxia.web.interceptor.ParametersExInterceptor"/>
+			<interceptor name="authorization" class="cn.benjamin.loxia.web.interceptor.AuthorizationInterceptor"/>
+			
+			<interceptor-stack name="defaultStack">
+            <interceptor-ref name="exceptionEx"/>
+            <interceptor-ref name="alias"/>
+            <interceptor-ref name="servletConfig"/>
+            <interceptor-ref name="i18n"/>
+            <interceptor-ref name="prepare"/>
+            <interceptor-ref name="chain"/>
+            <interceptor-ref name="debugging"/>            
+            <interceptor-ref name="scopedModelDriven"/>
+            <interceptor-ref name="modelDriven"/>   
+            <interceptor-ref name="authorization"/>         
+            <interceptor-ref name="fileUpload"/>
+            <interceptor-ref name="checkbox"/>
+            <interceptor-ref name="multiselect"/>
+            <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="paramsEx">
+              <param name="excludeParams">dojo\..*,^struts\..*</param>
+            </interceptor-ref>
+            <interceptor-ref name="conversionError"/>
+            <interceptor-ref name="validation">
+                <param name="excludeMethods">input,back,cancel,browse</param>
+            </interceptor-ref>
+            <interceptor-ref name="workflow">
+                <param name="excludeMethods">input,back,cancel,browse</param>
+            </interceptor-ref>
+        </interceptor-stack>
+		</interceptors>		
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error"/>
+		</global-exception-mappings>
+	</package>
+	<package name="/" extends="default" namespace="/">
+		<action name="desktop" class="desktopAction">
+			<result>/desktop.jsp</result>
+		</action>
+		<action name="accessdenied" method="accessDenied" class="desktopAction">
+			<result>/login.jsp</result>
+			<result name="error">/accessdenied.jsp</result>
+		</action>
+	</package>
 </struts>
