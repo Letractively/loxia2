@@ -1,28 +1,36 @@
 package cn.benjamin.loxia.examples.action;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Map;
 
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.springframework.security.AuthenticationException;
+import org.apache.struts2.interceptor.RequestAware;
+import org.springframework.security.context.SecurityContextHolder;
 
 import cn.benjamin.loxia.web.BaseProfileAction;
 
-public class DesktopAction extends BaseProfileAction implements ServletRequestAware{
+public class DesktopAction extends BaseProfileAction implements RequestAware{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1161602517758806580L;
 	
-	private HttpServletRequest httpRequest;
-
-	public String accessDenied() throws Exception{
-		System.out.println(httpRequest.getParameterMap());
-		System.out.println(httpRequest.getSession().getAttributeNames());
-		return SUCCESS;
+	@SuppressWarnings("unchecked")
+	Map request;
+	
+	@SuppressWarnings("unchecked")
+	public void setRequest(Map request) {
+		this.request = request;
 	}
 
-	public void setServletRequest(HttpServletRequest req) {
-		this.httpRequest = req; 
+	@SuppressWarnings("unchecked")
+	public String logout() throws Exception{
+		SecurityContextHolder.getContext().setAuthentication(null);
+		request.put("messages", Arrays.asList("System logout successfully."));
+		return SUCCESS;
+	}
+	
+	public String getUserInfo(){		
+		return userDetails.getUser().getUserName() + "[" + userDetails.getUsername() + "]";
 	}
 }

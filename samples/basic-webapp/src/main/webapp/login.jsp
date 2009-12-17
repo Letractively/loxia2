@@ -21,6 +21,9 @@
 			        loxia.unlockPage();
 			    	showErrorMsg(data[0]);
 			    });
+
+			    if($j("#info-block").find("li").length >0)
+			    	$j("#info-block").show();
 			});
 			
 			function showErrorMsg(msg){
@@ -51,11 +54,12 @@
 	</div>
 	</form>
 	</div>
-	<div class="ui-widget" id="info-block" <%if(!error){ %>style="display:none;"<%} %>>
+	<div class="ui-widget" id="info-block" style="display:none;">
 	<div class="ui-state-highlight ui-corner-all"  style="padding: .3em .7em; width: auto;">
 	<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: 0.3em; margin-top: 2px;"></span>
 	<ul style="min-height:1%; list-style:none; margin: 0; padding-left: 0;">
 	<%if(error){ %><li>Wrong user name or password.</li><%} %>
+	<s:iterator value="#request.messages"><li><s:property/></li></s:iterator>
 	</ul>
 	</p></div>
 	</div>

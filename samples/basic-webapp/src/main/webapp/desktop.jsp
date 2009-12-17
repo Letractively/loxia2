@@ -8,8 +8,38 @@
 		<link rel="stylesheet" type="text/css"  href="<s:url value='/css/dashboard/default.css' includeParams='none' encode='false'/>"/>
 		<style>		
 			#main {height: 400px;}				
+			#loginfobar {float: right; height: 92px;}
+			#loginfobar p{color: #FFF; font-size: 0.75em; font-weight: bold; margin-top: 60px; padding: 6px 10px;}
 		</style>
-		<script type="text/javascript">			
+		<script type="text/javascript">		
+			$j(document).ready(function(){
+				$j(".sidenav .ui-widget-content").each(function(){
+						$j(this).data("height",$j(this).height());
+					});
+				$j(".sidenav .ui-state-active a").hover(function(){
+						$j(this).find(".ui-icon-triangle-1-n").removeClass("ui-icon-triangle-1-n").addClass("ui-icon-circle-triangle-n");
+						$j(this).find(".ui-icon-triangle-1-s").removeClass("ui-icon-triangle-1-s").addClass("ui-icon-circle-triangle-s");
+					},function(){
+						$j(this).find(".ui-icon-circle-triangle-n").removeClass("ui-icon-circle-triangle-n").addClass("ui-icon-triangle-1-n");
+						$j(this).find(".ui-icon-circle-triangle-s").removeClass("ui-icon-circle-triangle-s").addClass("ui-icon-triangle-1-s");
+					});
+				$j(".sidenav .ui-state-active a").click(function(){
+						var $content = $j(this).parents(".sidenav").find(".ui-widget-content");
+						if($content.data("isHidden")){	
+							$content.data("isHidden",false);
+							//$j(this).find("span.ui-icon-triangle-1-s").removeClass("ui-icon-carat-1-s").addClass("ui-icon-carat-1-n");	
+							$j(this).find("span.ui-icon-circle-triangle-s").removeClass("ui-icon-circle-triangle-s").addClass("ui-icon-circle-triangle-n");							
+							$content.show();
+							$content.animate({height:$content.data("height")},"slow");							
+						}else{							
+							$content.data("isHidden",true);		
+							//$j(this).find("span.ui-icon-triangle-1-n").removeClass("ui-icon-carat-1-n").addClass("ui-icon-carat-1-s");	
+							$j(this).find("span.ui-icon-circle-triangle-n").removeClass("ui-icon-circle-triangle-n").addClass("ui-icon-circle-triangle-s");
+							$content.hide();															
+							$content.animate({height:0},"slow");	
+						}
+					});
+			});	
 		</script>
 	</head>
 	<body>
@@ -25,14 +55,23 @@
 					<a href="#">Suspendisse</a>
 					<a href="#">Elemen</a>
 					<div class="clearer"><span></span></div>
-				</div>				
+				</div>		
+				
+				<div id="loginfobar">
+					<p>Current User:&nbsp;<s:property value="userInfo"/>&nbsp; <a href="<s:url value='/logout.do'/>">logout</a></p>
+				</div>		
 			</div>
 			<div class="main" id="main">
 				<div class="content">
 					<p>Main Content Here.</p>
 				</div>
-				<div class="sidenav">
-					<p>Side Nav Here.</p>
+				<div class="sidenav">			
+					<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">User Profile
+					<a href="#" style="float: right;"><span class="ui-icon ui-icon-triangle-1-n"></span></a></div>
+					<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
+						<p>User Profile Here</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>					
 				</div>
 				<div class="clearer"><span></span></div>
 			</div>			

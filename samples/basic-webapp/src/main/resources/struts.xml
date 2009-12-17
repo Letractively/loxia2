@@ -52,9 +52,8 @@
 		<action name="desktop" class="desktopAction">
 			<result>/desktop.jsp</result>
 		</action>
-		<action name="accessdenied" method="accessDenied" class="desktopAction">
+		<action name="logout" method="logout" class="desktopAction">
 			<result>/login.jsp</result>
-			<result name="error">/accessdenied.jsp</result>
 		</action>
 	</package>
 </struts>
