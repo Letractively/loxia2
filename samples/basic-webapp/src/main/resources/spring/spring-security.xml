@@ -4,17 +4,35 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
-	<sec:http>		
+	<sec:http entry-point-ref="authenticationEntryPoint">		
 		<sec:intercept-url pattern="/login.jsp" filters="none"/>
-		<sec:intercept-url pattern="/accessdenied.do" filters="none"/>
+		<sec:intercept-url pattern="/accessdenied.jsp" filters="none"/>
 		<sec:intercept-url pattern="/css/**" filters="none"/>
 		<sec:intercept-url pattern="/images/**" filters="none"/>
 		<sec:intercept-url pattern="/scripts/**" filters="none"/>
-		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>	
-		<sec:form-login login-page="/login.jsp" authentication-failure-url="/accessdenied.do" default-target-url="/desktop.do"/>			
+		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>			
 		<sec:anonymous/>
-	</sec:http>	
+	</sec:http>		
   	
+  	<bean id="authenticationProcessingFilter"
+	    class="org.springframework.security.ui.webapp.AuthenticationProcessingFilter">
+	  <sec:custom-filter position="AUTHENTICATION_PROCESSING_FILTER"/>
+	  <property name="authenticationManager" ref="authenticationManager"/>
+	  <property name="authenticationFailureUrl" value="/accessdenied.jsp"/>
+	  <property name="defaultTargetUrl" value="/desktop.do"/>
+	  <property name="filterProcessesUrl" value="/j_spring_security_check"/>
+	  <property name="exceptionMappings">
+	    <props>
+	      <prop key="org.springframework.security.BadCredentialsException">/login.jsp?error=true</prop>
+	    </props>
+	  </property>
+	</bean>
+	
+	<bean id="authenticationEntryPoint"
+        class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+        <property name="loginFormUrl" value="/accessdenied.jsp"/>
+    </bean>
+	
   	<sec:authentication-manager alias="authenticationManager"/>      
   	
   	<sec:authentication-provider user-service-ref="userDetailsService"/>
