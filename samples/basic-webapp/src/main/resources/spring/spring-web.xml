@@ -2,5 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"	
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="desktopAction" class="cn.benjamin.loxia.examples.action.DesktopAction" scope="request"/>
+	<bean id="desktopAction" class="cn.benjamin.loxia.examples.action.DesktopAction" scope="request">
+		<property name="userInformationManager" ref="userInformationManager"/>
+	</bean>
+	<bean id="getAttachmentAction" class="cn.benjamin.loxia.examples.action.GetAttachmentAction" scope="request">
+		<property name="userInformationManager" ref="userInformationManager"/>
+	</bean>
 </beans>
