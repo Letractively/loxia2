@@ -12,11 +12,21 @@
 
 		<script type="text/javascript">		
 			var $j = jQuery.noConflict();
-			
+			function getTimeUrl(url){
+				var iTime=(new Date()).getTime();
+				if (url.indexOf("loxiaflag=") >= 0 ){
+					url = url.replace(/loxiaflag=\d{13}/, "loxiaflag="+iTime.toString());
+					return url ;
+				}
+
+				url+=(/\?/.test(url)) ? "&" : "?";
+				return (url+"loxiaflag="+iTime.toString());
+			};
 			$j(document).ready(function(){
 				var errorMessage = $j("#errorMsg").val();
 				if(!errorMessage){
-<s:if test="#request.userInformation != null">
+<s:if test="#request.userInformation != null">		
+					$j("div[name='attachInfo'] img").attr("src",getTimeUrl($j("div[name='attachInfo'] img").attr("src")));
 					parent.$portrait.html($j("div[name='attachInfo']").html());
 </s:if>
 				}
