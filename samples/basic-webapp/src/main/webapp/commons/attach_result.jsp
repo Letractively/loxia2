@@ -14,43 +14,20 @@
 			var $j = jQuery.noConflict();
 			
 			$j(document).ready(function(){
-				/*
-				var errorMessage = "";
-				if($j(".errorMessage").length > 0) {
-					errorMessage = $j(".errorMessage").html();
-					if(errorMessage != null && errorMessage != "") {
-						parent.errorMsg.innerHTML = '<p>' + errorMessage + '</p>';
-						parent.panelCtl.click();
-						return;
-				    }	
-				}	
-				var exceptionMsg = $j("#uploadErrorMsg").html();	
-				if(exceptionMsg != null && exceptionMsg != "") {	
-					parent.errorMsg.innerHTML = exceptionMsg;
-					parent.panelCtl.click();
-					return;
-				}	
-				if($j("#isUpload").html() != "") {
-					if($j("#attachmentId").html() != "" && parent.document.getElementById("newAttId") != null) {		
-					  parent.document.getElementById("newAttId").value = $j("#attachmentId").html(); 
-					}
-					parent.goNext();		
-				} 	 
-				
-				if($j("#projectGroupReportFieldInfoId").html() != ""){
-					parent.downloadCtl.click();
-				} */
+				var errorMessage = $j("#errorMsg").val();
+				if(!errorMessage){
+<s:if test="#request.userInformation != null">
+					parent.$portrait.html($j("div[name='attachInfo']").html());
+</s:if>
+				}
 			});	
 			
 		</script>
 	</head>
 	<body>
-	<!-- 
-		<s:fielderror/>
-		<div id="uploadErrorMsg"><s:property value="exception.message"/></div>
-		<div id="isUpload">${isUpload}</div>
-		<div id="attachmentId">${attachmentId}</div>
-		<div id="projectGroupReportFieldInfoId">${projectGroupReportFieldInfoId}</div>
-	 -->
+	<s:hidden name="errorMsg" id="errorMsg" value="%{#request.errorMessage}"/>
+	<s:if test="#request.userInformation != null">
+		<div name="attachInfo"><img src='<s:url value="/commons/getattachment.do"/>?userInfoIdForPortrait=<s:property value="#request.userInformation.id"/>'></img></div>
+	</s:if>	
 	</body>
 </html>

@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="desktopAction" class="cn.benjamin.loxia.examples.action.DesktopAction" scope="request">
 		<property name="userInformationManager" ref="userInformationManager"/>
+		<property name="userInformationDao" ref="userInformationDao"/>
 	</bean>
 	<bean id="getAttachmentAction" class="cn.benjamin.loxia.examples.action.GetAttachmentAction" scope="request">
 		<property name="userInformationManager" ref="userInformationManager"/>

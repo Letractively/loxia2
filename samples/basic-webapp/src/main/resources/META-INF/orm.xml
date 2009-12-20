@@ -5,4 +5,13 @@
 	<named-query name="UserInformation.findUserInformationByUser">
 		<query><![CDATA[select ui from UserInformation ui where ui.user.id = :userId]]></query>
 	</named-query>
+	<sql-result-set-mapping name="userInfo">
+		<column-result name="ID"/>
+		<column-result name="LOGIN_NAME"/>
+		<column-result name="USER_NAME"/>
+		<column-result name="UID"/>
+		<column-result name="HABBIT"/>
+		<column-result name="DESCRIPTION"/>
+		<column-result name="WITH_PORTRAIT"/>
+	</sql-result-set-mapping>
 </entity-mappings>

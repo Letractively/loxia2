@@ -7,5 +7,6 @@
 	<import resource="spring/spring-security.xml"/>
 	<import resource="spring/spring-dao.xml"/>
 	<import resource="spring/spring-manager.xml"/>
+	<import resource="spring/spring-query.xml"/>
 	<import resource="spring/spring-web.xml"/>
 </beans>

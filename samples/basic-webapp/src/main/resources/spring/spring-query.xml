@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"	
+	xmlns:loxia="http://loxia.benjamin.cn/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		
+	<bean id="UserInformation.findUserInfosSql" class="cn.benjamin.loxia.dao.support.DynamicQueryHolder">
+		<constructor-arg>
+			<value>
+				<![CDATA[select u.ID,u.LOGIN_NAME,u.USER_NAME,ui.ID as UID,
+					ui.HABBIT,ui.DESCRIPTION,(case when ui.PORTRAIT is null then 0 else 1 end) as WITH_PORTRAIT
+					from T_SYS_USER u left outer join T_BI_USER_INFO ui on u.id = ui.USER_ID
+				]]>
+			</value>
+		</constructor-arg>
+	</bean>
+</beans>

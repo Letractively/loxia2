@@ -14,7 +14,7 @@
 			<interceptor name="authorization" class="cn.benjamin.loxia.web.interceptor.AuthorizationInterceptor"/>
 			
 			<interceptor-stack name="defaultStack">
-            <interceptor-ref name="exceptionEx"/>
+            <interceptor-ref name="exceptionEx"><param name="debug">true</param></interceptor-ref>
             <interceptor-ref name="alias"/>
             <interceptor-ref name="servletConfig"/>
             <interceptor-ref name="i18n"/>
@@ -60,7 +60,7 @@
 		</action>
 	</package>
 	<package name="commons" extends="default" namespace="/commons">
-		<action class="getAttachmentAction">
+		<action name="getattachment" class="getAttachmentAction">
 			<result type="stream">
 				<param name="contentType">${contentType}</param>
 				<param name="inputName">inputStream</param>

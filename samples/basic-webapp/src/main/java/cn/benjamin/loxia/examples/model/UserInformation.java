@@ -39,9 +39,12 @@ public class UserInformation extends BaseModel {
 	@Column(name="HABBIT", length=500)
 	private String habbit;
 	
+	@Column(name="DESCRIPTION", length=2000)
+	private String description;
+		
 	@Lob
 	@Basic(fetch=FetchType.LAZY)
-    @Column(name="PORTRAIT", columnDefinition="BLOB")
+    @Column(name="PORTRAIT", columnDefinition="VARBINARY(500000)", nullable=true)
 	private byte[] portrait;
 	
 	@Version
@@ -63,6 +66,12 @@ public class UserInformation extends BaseModel {
 	}
 	public void setHabbit(String habbit) {
 		this.habbit = habbit;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public byte[] getPortrait() {
 		return portrait;

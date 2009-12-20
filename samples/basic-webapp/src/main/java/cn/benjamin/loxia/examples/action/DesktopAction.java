@@ -7,10 +7,14 @@ import java.util.Map;
 import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.security.context.SecurityContextHolder;
 
+import cn.benjamin.loxia.dao.Sort;
+import cn.benjamin.loxia.examples.dao.UserInformationDao;
 import cn.benjamin.loxia.examples.manager.UserInformationManager;
 import cn.benjamin.loxia.examples.model.UserInformation;
 import cn.benjamin.loxia.support.image.ImageResizer;
 import cn.benjamin.loxia.utils.FileUtil;
+import cn.benjamin.loxia.utils.PropListCopyable;
+import cn.benjamin.loxia.utils.PropertyUtil;
 import cn.benjamin.loxia.web.BaseProfileAction;
 
 public class DesktopAction extends BaseProfileAction implements RequestAware{
@@ -25,6 +29,7 @@ public class DesktopAction extends BaseProfileAction implements RequestAware{
 	private String portraitFileName;	
 
 	private UserInformationManager userInformationManager;	
+	private UserInformationDao userInformationDao;	
 
 	@SuppressWarnings("unchecked")
 	Map request;
@@ -32,6 +37,24 @@ public class DesktopAction extends BaseProfileAction implements RequestAware{
 	@SuppressWarnings("unchecked")
 	public void setRequest(Map request) {
 		this.request = request;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String execute() throws Exception{
+		UsersTableModel tableModel = new UsersTableModel();
+		tableModel.setUserInformationDao(userInformationDao);
+		tableModel.setPagable(true);
+		tableModel.setItemPerPage(20);
+		tableModel.setSorts(new Sort[]{new Sort("u.USER_NAME")});
+		request.put("userTableModel", tableModel.query().getModel());
+		UserInformation ui = userInformationDao.findUserInformationByUser(userDetails.getUser().getId());
+		if(ui != null){
+			UserInformation retUi = new UserInformation();
+			PropertyUtil.copyProperties(ui, retUi, new PropListCopyable("id","habbit","description"));
+			request.put("userInformation", retUi);
+		}
+		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -44,15 +67,20 @@ public class DesktopAction extends BaseProfileAction implements RequestAware{
 	@SuppressWarnings("unchecked")
 	public String uploadPortrait(){
 		try{
-			if(portraitContentType.indexOf("image") >0){					
+			logger.debug("upload portrait's content type: {}", portraitContentType);
+			if(portraitContentType.indexOf("image") ==0){					
 				byte[] portraits = ImageResizer.resizeImageAsJPG(FileUtil.getBytesFromFile(portrait), 72, 92); 
 				UserInformation infor =
 					userInformationManager.updatePortrait(userDetails.getUser().getId(), portraits);
+				UserInformation ui = new UserInformation();
+				PropertyUtil.copyProperties(infor, ui, new PropListCopyable("id","habbit","description"));
 				request.put("userInformation", infor);
 			}else{
 				request.put("errorMessage", "Invalid picture.");
 			}
 		}catch(Exception e){
+			if(logger.isDebugEnabled())
+				e.printStackTrace();
 			request.put("errorMessage", "Portrait upload failure.");
 		}
 		return SUCCESS;
@@ -69,6 +97,14 @@ public class DesktopAction extends BaseProfileAction implements RequestAware{
 	public void setUserInformationManager(
 			UserInformationManager userInformationManager) {
 		this.userInformationManager = userInformationManager;
+	}
+	
+	public UserInformationDao getUserInformationDao() {
+		return userInformationDao;
+	}
+
+	public void setUserInformationDao(UserInformationDao userInformationDao) {
+		this.userInformationDao = userInformationDao;
 	}
 	
 	public File getPortrait() {
