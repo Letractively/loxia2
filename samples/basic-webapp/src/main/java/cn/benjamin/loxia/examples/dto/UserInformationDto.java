@@ -8,7 +8,8 @@ public class UserInformationDto {
 	private String habbit;
 	private String description;
 	private boolean withProtrait;
-	
+	private boolean system;
+		
 	public Long getId() {
 		return id;
 	}
@@ -53,5 +54,11 @@ public class UserInformationDto {
 	}
 	public boolean isWithInformation(){
 		return (uid != null);
+	}
+	public boolean isSystem() {
+		return system;
+	}
+	public void setSystem(boolean system) {
+		this.system = system;
 	}
 }

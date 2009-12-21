@@ -9,6 +9,7 @@
 		<column-result name="ID"/>
 		<column-result name="LOGIN_NAME"/>
 		<column-result name="USER_NAME"/>
+		<column-result name="IS_SYSTEM"/>
 		<column-result name="UID"/>
 		<column-result name="HABBIT"/>
 		<column-result name="DESCRIPTION"/>

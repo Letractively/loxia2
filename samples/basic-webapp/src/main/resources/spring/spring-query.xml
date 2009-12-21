@@ -8,7 +8,7 @@
 	<bean id="UserInformation.findUserInfosSql" class="cn.benjamin.loxia.dao.support.DynamicQueryHolder">
 		<constructor-arg>
 			<value>
-				<![CDATA[select u.ID,u.LOGIN_NAME,u.USER_NAME,ui.ID as UID,
+				<![CDATA[select u.ID,u.LOGIN_NAME,u.USER_NAME,u.IS_SYSTEM,ui.ID as UID,
 					ui.HABBIT,ui.DESCRIPTION,(case when ui.PORTRAIT is null then 0 else 1 end) as WITH_PORTRAIT
 					from T_SYS_USER u left outer join T_BI_USER_INFO ui on u.id = ui.USER_ID
 				]]>

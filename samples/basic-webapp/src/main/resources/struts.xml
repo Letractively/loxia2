@@ -43,6 +43,9 @@
 		</interceptors>		
 		<global-results>
 			<result name="error">/error.jsp</result>
+			<result name="json" type="json">
+				<param name="charSet">UTF-8</param>
+			</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.Exception" result="error"/>
@@ -70,5 +73,6 @@
 				</param>
 			</result>
 		</action>		
+		<action name="getusersindesktop" method="getUsers" class="desktopAction"/>
 	</package>
 </struts>

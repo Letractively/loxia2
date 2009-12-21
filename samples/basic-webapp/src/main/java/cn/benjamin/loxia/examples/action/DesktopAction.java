@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.security.context.SecurityContextHolder;
 
 import cn.benjamin.loxia.dao.Sort;
@@ -16,8 +17,9 @@ import cn.benjamin.loxia.utils.FileUtil;
 import cn.benjamin.loxia.utils.PropListCopyable;
 import cn.benjamin.loxia.utils.PropertyUtil;
 import cn.benjamin.loxia.web.BaseProfileAction;
+import cn.benjamin.loxia.web.annotation.DataResponse;
 
-public class DesktopAction extends BaseProfileAction implements RequestAware{
+public class DesktopAction extends BaseProfileAction implements RequestAware, SessionAware{
 
 	/**
 	 * 
@@ -35,6 +37,14 @@ public class DesktopAction extends BaseProfileAction implements RequestAware{
 	Map request;
 	
 	@SuppressWarnings("unchecked")
+	Map session;
+	
+	@SuppressWarnings("unchecked")
+	public void setSession(Map session) {
+		this.session = session;
+	}
+
+	@SuppressWarnings("unchecked")
 	public void setRequest(Map request) {
 		this.request = request;
 	}
@@ -47,7 +57,7 @@ public class DesktopAction extends BaseProfileAction implements RequestAware{
 		tableModel.setPagable(true);
 		tableModel.setItemPerPage(20);
 		tableModel.setSorts(new Sort[]{new Sort("u.USER_NAME")});
-		request.put("userTableModel", tableModel.query().getModel());
+		session.put("userTableModel", tableModel.query());
 		UserInformation ui = userInformationDao.findUserInformationByUser(userDetails.getUser().getId());
 		if(ui != null){
 			UserInformation retUi = new UserInformation();
@@ -62,6 +72,18 @@ public class DesktopAction extends BaseProfileAction implements RequestAware{
 		SecurityContextHolder.getContext().setAuthentication(null);
 		request.put("messages", Arrays.asList("System logout successfully."));
 		return SUCCESS;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@DataResponse
+	public String getUsers(){
+		UsersTableModel tableModel = (UsersTableModel)session.get("userTableModel");
+		tableModel.setCurrentPage(currentPage);
+		tableModel.setItemPerPage(pageSize);
+		tableModel.setSortString(sortString);
+		session.put("userTableModel", tableModel.query());
+		request.put("json", tableModel.getModel());
+		return JSON;
 	}
 	
 	@SuppressWarnings("unchecked")

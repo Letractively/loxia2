@@ -28,6 +28,7 @@
 <s:if test="#request.userInformation != null">		
 					$j("div[name='attachInfo'] img").attr("src",getTimeUrl($j("div[name='attachInfo'] img").attr("src")));
 					parent.$portrait.html($j("div[name='attachInfo']").html());
+					parent.$userlistTable.reload();
 </s:if>
 				}
 			});	

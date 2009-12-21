@@ -21,11 +21,17 @@
 			.content .loxia{font-size: 80%;}
 			.content .ui-loxia-table tr{height: 22px;}
 			.content .ui-loxia-table th, .content .ui-loxia-table th{line-height: 22px;}
+			
+			#userlist-table td.col-3 {vertical-align: bottom;}
+			#userlist-table img {float: left; border: 1px solid transparent; margin: 2px;}
+			#userlist-table img.hover {border-color: #8f8f8f;}
 		</style>
 		<script type="text/javascript">		
 			var $portrait;
+			var $userlistTable;
 			$j(document).ready(function(){
 				$portrait = $j("#portrait");
+				$userlistTable = $j("#userlist-table").data("loxiatable");
 				$j(".sidenav .ui-widget-content").each(function(){
 						$j(this).data("height",$j(this).height());
 					});
@@ -60,6 +66,11 @@
 				$j("#portrait-uploader img").click(function(){
 					$j('#up-portrait-dlg').loxiadialog("open");
 					});
+				$j("#userlist-table img").hover(function(){
+						$j(this).addClass("hover");
+					},function(){
+						$j(this).removeClass("hover");
+					});
 			});	
 			var upPortraitDlgSettings = {modal: true,
 					autoOpen: false,
@@ -74,7 +85,20 @@
 	   			 				$j('#up-portrait-dlg').loxiadialog("close");
 			   			 	 }}]
 				};
-			var t1Settings = <s:property value="#request.userTableModel" escape="false"/>;
+			var t1Settings = $j.extend({
+					url: '<s:url value="/commons/getusersindesktop.do" includeParams="none" encode="false"/>'
+				}, <s:property value="#session.userTableModel.model" escape="false"/>);
+			function genUserListOpTd(data){
+				var result = "&nbsp;";
+				result += '<img title="add/modify user information" src="<s:url value='/images/pencil.gif' includeParams='none' encode='false'/>" onclick="editUserInfo(' + data.id + ')"></img>';
+				if(!data.system)
+					result += '<img title="delete user" src="<s:url value='/images/trash.gif' includeParams='none' encode='false'/>" onclick="deleteUser(' + data.id + ')"></img>';
+				return result;
+			}
+			function editUserInfo(userId){
+			}
+			function deleteUser(userId){
+			}
 		</script>
 	</head>
 	<body>
@@ -105,13 +129,13 @@
 				<p></p>
 				<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Current User List</div>
 				<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden; padding-bottom: 4px;">
-				<table loxiaType="table" settings="t1Settings" cellpadding="0" cellspacing="0">
+				<table id="userlist-table" loxiaType="table" settings="t1Settings" cellpadding="0" cellspacing="0">
 				<thead>
 				<tr>
 					<th property="userName" sort="u.USER_NAME" style="width:60%">User</th>
 					<th property="withInformation" style="width:10%">Info.</th>
 					<th property="withProtrait" style="width:10%">Portrait</th>
-					<th style="width:20%">Operation</th>
+					<th generator="genUserListOpTd" style="width:20%">Operation</th>
 				</tr>
 				</thead>
 				<tbody></tbody>

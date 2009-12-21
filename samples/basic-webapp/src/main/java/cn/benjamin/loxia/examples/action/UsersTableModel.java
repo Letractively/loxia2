@@ -42,11 +42,11 @@ public class UsersTableModel extends AbstractTableModelSupport<UserInformationDt
 		dto.setId(objs[0] == null ? null : ((BigInteger)objs[0]).longValue());
 		dto.setLoginName((String)objs[1]);
 		dto.setUserName((String)objs[2]);
-		dto.setUid(objs[3] == null ? null : ((BigInteger)objs[3]).longValue());
-		dto.setHabbit((String)objs[4]);
-		dto.setDescription((String)objs[5]);
-		Integer i = (Integer)objs[6];
-		dto.setWithProtrait((i>0));
+		dto.setSystem((Boolean)objs[3]);
+		dto.setUid(objs[4] == null ? null : ((BigInteger)objs[4]).longValue());
+		dto.setHabbit((String)objs[5]);
+		dto.setDescription((String)objs[6]);
+		dto.setWithProtrait(((Integer)objs[7] > 0));
 		return dto;
 	}
 	
