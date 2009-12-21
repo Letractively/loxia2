@@ -23,8 +23,12 @@
 			.content .ui-loxia-table th, .content .ui-loxia-table th{line-height: 22px;}
 			
 			#userlist-table td.col-3 {vertical-align: bottom;}
-			#userlist-table img {float: left; border: 1px solid transparent; margin: 2px;}
+			#userlist-table img {float: left; border: 1px solid transparent; margin: 2px; cursor: pointer;}
 			#userlist-table img.hover {border-color: #8f8f8f;}
+			a.rtmenu {font-size: 8pt;}
+			a.rtmenu, a.rtmenu:visited {color: #EBEBEB;}
+			a.rtmenu:hover{color: #FFFF00;}
+			a.rtmenu span{padding-right: 18px;}
 		</style>
 		<script type="text/javascript">		
 			var $portrait;
@@ -95,6 +99,11 @@
 					result += '<img title="delete user" src="<s:url value='/images/trash.gif' includeParams='none' encode='false'/>" onclick="deleteUser(' + data.id + ')"></img>';
 				return result;
 			}
+			function addUser(){
+				var oWin = loxia.openPage('<s:url value="/user/adduserentry.do" includeParams="none" encode="false"/>','useraddwindow',null,[640,400]);
+				if(!oWin.opener) oWin.opener = self;
+				oWin.focus();				
+			}
 			function editUserInfo(userId){
 			}
 			function deleteUser(userId){
@@ -127,7 +136,8 @@
 					<p>Main Content Here.</p>
 				</div>
 				<p></p>
-				<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Current User List</div>
+				<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Current User List
+				<a class="rtmenu" title="Add new users here" href="#" onclick="addUser();return false;" style="float: right;"><span style="background: url('images/plus.png') right bottom no-repeat;">New User</span></a></div>
 				<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden; padding-bottom: 4px;">
 				<table id="userlist-table" loxiaType="table" settings="t1Settings" cellpadding="0" cellspacing="0">
 				<thead>

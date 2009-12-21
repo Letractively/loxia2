@@ -1,3 +1,10 @@
 body {margin: 30px;}
 body, .ui-widget { font:10pt Verdana, Arail,"Trebuchet MS", sans-serif;}	
 div.ui-datepicker{ font-size: 11px;}
+
+table .even { background-color: #f0f0f0; /*eef2ff*/ }
+table .odd { background-color: #fff; }
+.label {font: bold 9pt Verdana, Arail,"Trebuchet MS", sans-serif; color: #CC6600;}
+.hint {font-size: 7pt; color:#0070A3;}
+.buttonbar {margin: 4px 2px; padding-top: 4px; border-top: 1px solid; border-color: #aed0ea; text-align: center;}
+.buttonbar input, .buttonbar button {margin: 0 2px;}

@@ -62,6 +62,11 @@
 			<result>/commons/attach_result.jsp</result>
 		</action>
 	</package>
+	<package name="user" extends="default" namespace="/user">
+		<action name="adduserentry" method="addUserEntry" class="userMaintainAction">
+			<result>/user/user_add.jsp</result>
+		</action>				
+	</package>
 	<package name="commons" extends="default" namespace="/commons">
 		<action name="getattachment" class="getAttachmentAction">
 			<result type="stream">
