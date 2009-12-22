@@ -6,7 +6,8 @@
 		<property name="userInformationManager" ref="userInformationManager"/>
 		<property name="userInformationDao" ref="userInformationDao"/>
 	</bean>
-	<bean id="userMaintainAction" class="cn.benjamin.loxia.examples.action.UserMaintainAction" scope="request">		
+	<bean id="userMaintainAction" class="cn.benjamin.loxia.examples.action.UserMaintainAction" scope="request">	
+		<property name="userDao" ref="userDao"/>	
 	</bean>
 	<bean id="getAttachmentAction" class="cn.benjamin.loxia.examples.action.GetAttachmentAction" scope="request">
 		<property name="userInformationManager" ref="userInformationManager"/>

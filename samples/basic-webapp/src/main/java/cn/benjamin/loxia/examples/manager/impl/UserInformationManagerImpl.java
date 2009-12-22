@@ -2,7 +2,7 @@ package cn.benjamin.loxia.examples.manager.impl;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.benjamin.loxia.dao.UserDao;
+import cn.benjamin.loxia.examples.dao.UserDao;
 import cn.benjamin.loxia.examples.dao.UserInformationDao;
 import cn.benjamin.loxia.examples.manager.UserInformationManager;
 import cn.benjamin.loxia.examples.model.UserInformation;

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.security.context.SecurityContextHolder;
 
@@ -19,7 +18,7 @@ import cn.benjamin.loxia.utils.PropertyUtil;
 import cn.benjamin.loxia.web.BaseProfileAction;
 import cn.benjamin.loxia.web.annotation.DataResponse;
 
-public class DesktopAction extends BaseProfileAction implements RequestAware, SessionAware{
+public class DesktopAction extends BaseProfileAction implements SessionAware{
 
 	/**
 	 * 
@@ -32,9 +31,6 @@ public class DesktopAction extends BaseProfileAction implements RequestAware, Se
 
 	private UserInformationManager userInformationManager;	
 	private UserInformationDao userInformationDao;	
-
-	@SuppressWarnings("unchecked")
-	Map request;
 	
 	@SuppressWarnings("unchecked")
 	Map session;
@@ -42,11 +38,6 @@ public class DesktopAction extends BaseProfileAction implements RequestAware, Se
 	@SuppressWarnings("unchecked")
 	public void setSession(Map session) {
 		this.session = session;
-	}
-
-	@SuppressWarnings("unchecked")
-	public void setRequest(Map request) {
-		this.request = request;
 	}
 	
 	@SuppressWarnings("unchecked")

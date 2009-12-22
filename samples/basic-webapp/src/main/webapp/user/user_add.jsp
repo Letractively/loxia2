@@ -12,7 +12,12 @@
 			$j(document).ready(function(){
 			});	
 			function checkUserUnique(value){
-				return loxia.SUCCESS;
+				var data = loxia.syncXhrGet('<s:url value="/commons/checkuserunique.do"/>',{data: {"user.loginName": value}});
+				if(data.unique)
+					return loxia.SUCCESS;
+				if(data.exception)
+					return "System Error";
+				return "Input is used, please change another one.";
 			}
 			function addUser(){
 				showErrorMsg("");
@@ -20,6 +25,14 @@
 				var form = $j("#addUserForm").get(0);
 				var errorMsg = loxia.validateForm(form);
 				if(errorMsg.length == 0){
+					var data = loxia.syncXhrPost('<s:url value="/user/adduser.do"/>',{form: form});
+					if(data.result){
+						opener.$userlistTable.reload();
+						window.close();
+					}else{
+						loxia.unlockPage();
+						showErrorMsg(data.exception.message || "System Error.");
+					}						
 				}else{
 					loxia.unlockPage();
 			    	showErrorMsg(errorMsg);

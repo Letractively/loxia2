@@ -6,8 +6,7 @@
 		<title>Dashboard for Basic Webapp</title>		
 		<s:include value="commons/meta.jsp"/>
 		<link rel="stylesheet" type="text/css"  href="<s:url value='/css/dashboard/default.css' includeParams='none' encode='false'/>"/>
-		<style>		
-			#main {height: 400px;}				
+		<style>					
 			#loginfobar {float: right; height: 92px;}
 			#loginfobar p{color: #FFF; font-size: 0.75em; font-weight: bold; margin-top: 60px; padding: 6px 10px;}
 			#portrait-container {width:90px;float:left;padding-top:8px;text-align:center; border: 1px solid #F2F5F7; margin: 2px;}
@@ -70,10 +69,12 @@
 				$j("#portrait-uploader img").click(function(){
 					$j('#up-portrait-dlg').loxiadialog("open");
 					});
-				$j("#userlist-table img").hover(function(){
-						$j(this).addClass("hover");
-					},function(){
-						$j(this).removeClass("hover");
+				$j("#userlist-table img").livequery(function(){
+						$j(this).hover(function(){
+							$j(this).addClass("hover");
+						},function(){
+							$j(this).removeClass("hover");
+					});
 					});
 			});	
 			var upPortraitDlgSettings = {modal: true,

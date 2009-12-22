@@ -5,6 +5,9 @@
 	<named-query name="UserInformation.findUserInformationByUser">
 		<query><![CDATA[select ui from UserInformation ui where ui.user.id = :userId]]></query>
 	</named-query>
+	<named-query name="User.findByLoginName">
+		<query><![CDATA[select u from cn.benjamin.loxia.model.User u where u.loginName = :loginName]]></query>
+	</named-query>
 	<sql-result-set-mapping name="userInfo">
 		<column-result name="ID"/>
 		<column-result name="LOGIN_NAME"/>

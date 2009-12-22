@@ -65,7 +65,8 @@
 	<package name="user" extends="default" namespace="/user">
 		<action name="adduserentry" method="addUserEntry" class="userMaintainAction">
 			<result>/user/user_add.jsp</result>
-		</action>				
+		</action>		
+		<action name="adduser" method="addUser" class="userMaintainAction"/>		
 	</package>
 	<package name="commons" extends="default" namespace="/commons">
 		<action name="getattachment" class="getAttachmentAction">
@@ -79,5 +80,6 @@
 			</result>
 		</action>		
 		<action name="getusersindesktop" method="getUsers" class="desktopAction"/>
+		<action name="checkuserunique" method="checkUserUnique" class="userMaintainAction"/>
 	</package>
 </struts>
