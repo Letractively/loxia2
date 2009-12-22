@@ -22,7 +22,7 @@
 			.content .ui-loxia-table tr{height: 22px;}
 			.content .ui-loxia-table th, .content .ui-loxia-table th{line-height: 22px;}
 			
-			#userlist-table td.col-3 {vertical-align: bottom;}
+			#userlist-table td.col-3 {vertical-align: middle;}
 			#userlist-table img {float: left; border: 1px solid transparent; margin: 2px; cursor: pointer;}
 			#userlist-table img.hover {border-color: #8f8f8f;}
 			a.rtmenu {font-size: 8pt;}
@@ -93,10 +93,11 @@
 					url: '<s:url value="/commons/getusersindesktop.do" includeParams="none" encode="false"/>'
 				}, <s:property value="#session.userTableModel.model" escape="false"/>);
 			function genUserListOpTd(data){
-				var result = "&nbsp;";
+				var result = "";
 				result += '<img title="add/modify user information" src="<s:url value='/images/pencil.gif' includeParams='none' encode='false'/>" onclick="editUserInfo(' + data.id + ')"></img>';
 				if(!data.system)
 					result += '<img title="delete user" src="<s:url value='/images/trash.gif' includeParams='none' encode='false'/>" onclick="deleteUser(' + data.id + ')"></img>';
+				result += '<div class="clearer"><span></span></div>';
 				return result;
 			}
 			function addUser(){
@@ -137,7 +138,9 @@
 				</div>
 				<p></p>
 				<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Current User List
-				<a class="rtmenu" title="Add new users here" href="#" onclick="addUser();return false;" style="float: right;"><span style="background: url('images/plus.png') right bottom no-repeat;">New User</span></a></div>
+				<a class="rtmenu" title="Add new users here" href="#" onclick="addUser();return false;" style="float: right;"><span style="background: url('images/plus.png') right bottom no-repeat;">New User</span></a>
+				<div class="clearer"><span></span></div>
+				</div>
 				<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden; padding-bottom: 4px;">
 				<table id="userlist-table" loxiaType="table" settings="t1Settings" cellpadding="0" cellspacing="0">
 				<thead>
@@ -160,7 +163,8 @@
 				</div>
 				<div class="sidenav" id="personal-profile">			
 					<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Personal Profile
-					<a href="#" style="float: right;"><span class="ui-icon ui-icon-triangle-1-n"></span></a></div>
+					<a href="#" style="float: right;"><span class="ui-icon ui-icon-triangle-1-n"></span></a>			
+					</div>
 					<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
 						<div id="portrait-container">
 						<div id="portrait">
