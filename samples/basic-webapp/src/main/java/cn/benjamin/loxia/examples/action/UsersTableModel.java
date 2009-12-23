@@ -10,10 +10,15 @@ import cn.benjamin.loxia.examples.dto.UserInformationDto;
 import cn.benjamin.loxia.web.table.AbstractTableModelSupport;
 import cn.benjamin.loxia.web.table.TableModel;
 
-public class UsersTableModel extends AbstractTableModelSupport<UserInformationDto> {
+public class UsersTableModel extends AbstractTableModelSupport<UserInformationDto> {	
+
 	private UserInformationDao userInformationDao;
 	
 	private Pagination<Object[]> p;
+	
+	public UsersTableModel() {
+		setPagable(true);
+	}
 	
 	@Override
 	public TableModel query(){

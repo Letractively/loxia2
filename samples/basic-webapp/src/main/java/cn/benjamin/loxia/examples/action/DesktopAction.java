@@ -2,6 +2,7 @@ package cn.benjamin.loxia.examples.action;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -9,6 +10,7 @@ import org.springframework.security.context.SecurityContextHolder;
 
 import cn.benjamin.loxia.dao.Sort;
 import cn.benjamin.loxia.examples.dao.UserInformationDao;
+import cn.benjamin.loxia.examples.dao.UserMemoDao;
 import cn.benjamin.loxia.examples.manager.UserInformationManager;
 import cn.benjamin.loxia.examples.model.UserInformation;
 import cn.benjamin.loxia.support.image.ImageResizer;
@@ -31,7 +33,8 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 
 	private UserInformationManager userInformationManager;	
 	private UserInformationDao userInformationDao;	
-	
+	private UserMemoDao userMemoDao;	
+
 	@SuppressWarnings("unchecked")
 	Map session;
 	
@@ -43,12 +46,14 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() throws Exception{
-		UsersTableModel tableModel = new UsersTableModel();
-		tableModel.setUserInformationDao(userInformationDao);
-		tableModel.setPagable(true);
-		tableModel.setItemPerPage(20);
-		tableModel.setSorts(new Sort[]{new Sort("u.USER_NAME")});
-		session.put("userTableModel", tableModel.query());
+		UsersTableModel userTableModel = new UsersTableModel();
+		userTableModel.setUserInformationDao(userInformationDao);
+		userTableModel.setItemPerPage(10);
+		userTableModel.setSorts(new Sort[]{new Sort("u.USER_NAME")});
+		session.put("userTableModel", userTableModel.query());
+		UserMemosTableModel umTableModel = new UserMemosTableModel(userDetails.getUser().getId(), new Date());
+		umTableModel.setUserMemoDao(userMemoDao);
+		session.put("umTableModel", umTableModel.query());
 		UserInformation ui = userInformationDao.findUserInformationByUser(userDetails.getUser().getId());
 		if(ui != null){
 			UserInformation retUi = new UserInformation();
@@ -74,6 +79,14 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 		tableModel.setSortString(sortString);
 		session.put("userTableModel", tableModel.query());
 		request.put("json", tableModel.getModel());
+		return JSON;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@DataResponse
+	public String getTodaysWork(){
+		UserMemosTableModel tableModel = (UserMemosTableModel)session.get("umTableModel");
+		request.put("json", tableModel.query().getModel());
 		return JSON;
 	}
 	
@@ -118,6 +131,13 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 
 	public void setUserInformationDao(UserInformationDao userInformationDao) {
 		this.userInformationDao = userInformationDao;
+	}
+	public UserMemoDao getUserMemoDao() {
+		return userMemoDao;
+	}
+
+	public void setUserMemoDao(UserMemoDao userMemoDao) {
+		this.userMemoDao = userMemoDao;
 	}
 	
 	public File getPortrait() {

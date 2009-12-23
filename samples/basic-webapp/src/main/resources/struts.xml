@@ -30,6 +30,7 @@
             <interceptor-ref name="staticParams"/>
             <interceptor-ref name="actionMappingParams"/>
             <interceptor-ref name="paramsEx">
+              <param name="ordered">true</param>
               <param name="excludeParams">dojo\..*,^struts\..*</param>
             </interceptor-ref>
             <interceptor-ref name="conversionError"/>
@@ -63,9 +64,15 @@
 		</action>
 	</package>
 	<package name="user" extends="default" namespace="/user">
-		<action name="adduserentry" method="addUserEntry" class="userMaintainAction">
+		<action name="adduserentry" class="userMaintainAction">
 			<result>/user/user_add.jsp</result>
 		</action>		
+		<action name="maintaintodolistentry" method="maintainTodoListEntry" class="userMaintainAction">
+			<result>/user/user_maintain_todolist.jsp</result>
+		</action>
+		<action name="maintaintodolist" method="maintainTodoList" class="userMaintainAction">
+			<result>/user/user_maintain_todolist.jsp</result>
+		</action>
 		<action name="adduser" method="addUser" class="userMaintainAction"/>		
 	</package>
 	<package name="commons" extends="default" namespace="/commons">
@@ -80,6 +87,7 @@
 			</result>
 		</action>		
 		<action name="getusersindesktop" method="getUsers" class="desktopAction"/>
+		<action name="gettodayswork" method="getTodaysWork" class="desktopAction"/>
 		<action name="checkuserunique" method="checkUserUnique" class="userMaintainAction"/>
 	</package>
 </struts>

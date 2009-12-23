@@ -7,4 +7,8 @@
 		<property name="userDao" ref="userDao"/>
 		<property name="userInformationDao" ref="userInformationDao"/>
 	</bean>
+	<bean id="userMemoManager" class="cn.benjamin.loxia.examples.manager.impl.UserMemoManagerImpl">
+		<property name="userDao" ref="userDao"/>
+		<property name="userMemoDao" ref="userMemoDao"/>
+	</bean>
 </beans>

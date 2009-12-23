@@ -93,6 +93,10 @@
 			var t1Settings = $j.extend({
 					url: '<s:url value="/commons/getusersindesktop.do" includeParams="none" encode="false"/>'
 				}, <s:property value="#session.userTableModel.model" escape="false"/>);
+			var t2Settings = $j.extend({
+				url: '<s:url value="/commons/gettodayswork.do" includeParams="none" encode="false"/>',
+				emptyMessage: "No work today."
+			}, <s:property value="#session.umTableModel.model" escape="false"/>);
 			function genUserListOpTd(data){
 				var result = "";
 				result += '<img title="add/modify user information" src="<s:url value='/images/pencil.gif' includeParams='none' encode='false'/>" onclick="editUserInfo(' + data.id + ')"></img>';
@@ -105,10 +109,15 @@
 				var oWin = loxia.openPage('<s:url value="/user/adduserentry.do" includeParams="none" encode="false"/>','useraddwindow',null,[640,400]);
 				if(!oWin.opener) oWin.opener = self;
 				oWin.focus();				
-			}
+			}			
 			function editUserInfo(userId){
 			}
 			function deleteUser(userId){
+			}
+			function editTodoList(){
+				var oWin = loxia.openPage('<s:url value="/user/maintaintodolistentry.do" includeParams="none" encode="false"/>','useraddtodowindow',null,[640,400]);
+				if(!oWin.opener) oWin.opener = self;
+				oWin.focus();
 			}
 		</script>
 	</head>
@@ -133,14 +142,18 @@
 			</div>
 			<div class="main" id="main">
 				<div class="content">
-				<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Personal Profile</div>
+				<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Todo List</span>
+				<a class="rtmenu" title="Add new users here" href="#" onclick="editTodoList();return false;" style="float: right;"><span style="background: url('images/pencil.gif') right bottom no-repeat;">Edit</span></a>
+				</div>
 				<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
-					<p>Main Content Here.</p>
+				<table id="todolist-table" loxiaType="table" settings="t2Settings" cellpadding="0" cellspacing="0">
+				<thead><tr><th property="memo">Today's Work</th></tr></thead>
+				<tbody></tbody><tbody></tbody><tbody></tbody>
+				</table>
 				</div>
 				<p></p>
-				<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Current User List
+				<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Current User List</span>
 				<a class="rtmenu" title="Add new users here" href="#" onclick="addUser();return false;" style="float: right;"><span style="background: url('images/plus.png') right bottom no-repeat;">New User</span></a>
-				<div class="clearer"><span></span></div>
 				</div>
 				<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden; padding-bottom: 4px;">
 				<table id="userlist-table" loxiaType="table" settings="t1Settings" cellpadding="0" cellspacing="0">
@@ -163,8 +176,8 @@
 				</div>
 				</div>
 				<div class="sidenav" id="personal-profile">			
-					<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Personal Profile
-					<a href="#" style="float: right;"><span class="ui-icon ui-icon-triangle-1-n"></span></a>			
+					<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Personal Profile</span>
+					<a href="#" style="float: right;"><span class="ui-icon ui-icon-triangle-1-n"></span></a>								
 					</div>
 					<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
 						<div id="portrait-container">

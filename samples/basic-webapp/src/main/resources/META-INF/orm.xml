@@ -8,6 +8,12 @@
 	<named-query name="User.findByLoginName">
 		<query><![CDATA[select u from cn.benjamin.loxia.model.User u where u.loginName = :loginName]]></query>
 	</named-query>
+	<named-query name="UserMemo.findUserMemosByUserIdAndDate">
+		<query><![CDATA[select um from UserMemo um where um.user.id = :userId and um.memoDate = :date order by um.id]]></query>
+	</named-query>	
+	<named-query name="UserMemo.deleteUserMemoByUserIdAndDate">
+		<query><![CDATA[delete from UserMemo um where um.user.id = :userId and um.memoDate = :date]]></query>
+	</named-query>
 	<sql-result-set-mapping name="userInfo">
 		<column-result name="ID"/>
 		<column-result name="LOGIN_NAME"/>

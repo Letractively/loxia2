@@ -10,9 +10,7 @@
         <class>cn.benjamin.loxia.model.PrivilegeType</class>
         <class>cn.benjamin.loxia.model.Role</class>
         <class>cn.benjamin.loxia.model.User</class>
-        <class>cn.benjamin.loxia.model.UserRole</class>
-        
-        <class>cn.benjamin.loxia.examples.model.UserInformation</class>
+        <class>cn.benjamin.loxia.model.UserRole</class>             
 		<properties>
 			<property name="hibernate.dialect" value="cn.benjamin.loxia.examples.CustomHSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />

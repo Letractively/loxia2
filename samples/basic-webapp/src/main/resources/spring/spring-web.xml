@@ -5,9 +5,12 @@
 	<bean id="desktopAction" class="cn.benjamin.loxia.examples.action.DesktopAction" scope="request">
 		<property name="userInformationManager" ref="userInformationManager"/>
 		<property name="userInformationDao" ref="userInformationDao"/>
+		<property name="userMemoDao" ref="userMemoDao"/>
 	</bean>
 	<bean id="userMaintainAction" class="cn.benjamin.loxia.examples.action.UserMaintainAction" scope="request">	
 		<property name="userDao" ref="userDao"/>	
+		<property name="userMemoDao" ref="userMemoDao"/>
+		<property name="userMemoManager" ref="userMemoManager"/>
 	</bean>
 	<bean id="getAttachmentAction" class="cn.benjamin.loxia.examples.action.GetAttachmentAction" scope="request">
 		<property name="userInformationManager" ref="userInformationManager"/>
