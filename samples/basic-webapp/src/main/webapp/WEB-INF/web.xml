@@ -21,6 +21,9 @@
 	<listener>
 	    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
+	<listener>
+    <listener-class>cn.benjamin.loxia.examples.InitServletContextListener</listener-class>
+  </listener>
 	
 	<!-- Spring Security -->
 	<filter>

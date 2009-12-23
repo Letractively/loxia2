@@ -31,7 +31,8 @@
 			<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Maintain Todo List</div>
 			<div class="ui-widget ui-widget-content ui-corner-bottom" style="background-image: none; overflow: hidden; padding-left: 4px;padding-right: 4px;">
 				<s:form name="maintainUserMemoForm" id="maintainUserMemoForm" action="maintaintodolist">
-				<s:token/>
+				<s:token/>				
+				<s:hidden name="date" value="%{@cn.benjamin.loxia.utils.DateUtil@today()}"/>				
 				<table loxiaType="edittable" settings="userMemoEditSettings" cellpadding="0" cellspacing="0">
 					<thead><tr><th width="40px;"><input type="checkbox"/></th><th>Todo List</th></tr></thead>
 					<tbody>

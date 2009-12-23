@@ -46,6 +46,7 @@ public class UserMaintainAction extends BaseProfileAction {
 	}
 	
 	public String maintainTodoList() throws Exception{		
+		logger.debug("collected date from page: {}", date);
 		userMemoManager.maintainUserMemos(userDetails.getUser().getId(), 
 						date == null ? DateUtil.today() : DateUtil.roundDate(date), userMemos);
 		prepareForTodoListMaintain();
