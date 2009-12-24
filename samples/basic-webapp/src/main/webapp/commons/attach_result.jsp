@@ -38,7 +38,7 @@
 	<body>
 	<s:hidden name="errorMsg" id="errorMsg" value="%{#request.errorMessage}"/>
 	<s:if test="#request.userInformation != null">
-		<div name="attachInfo"><img src='<s:url value="/commons/getattachment.do"/>?userInfoIdForPortrait=<s:property value="#request.userInformation.id"/>'></img></div>
+		<div name="attachInfo"><img src='<s:url value="/commons/userportrait"/>/<s:property value="#request.userInformation.id"/>.jpg'></img></div>
 	</s:if>	
 	</body>
 </html>
