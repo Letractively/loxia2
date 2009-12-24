@@ -14,6 +14,7 @@ import cn.benjamin.loxia.model.User;
 import cn.benjamin.loxia.support.json.JSONObject;
 import cn.benjamin.loxia.utils.DateUtil;
 import cn.benjamin.loxia.web.BaseProfileAction;
+import cn.benjamin.loxia.web.annotation.Acl;
 import cn.benjamin.loxia.web.annotation.DataResponse;
 
 public class UserMaintainAction extends BaseProfileAction {
@@ -40,11 +41,13 @@ public class UserMaintainAction extends BaseProfileAction {
 						date == null ? DateUtil.today() : DateUtil.roundDate(date)));
 	}
 
+	@Acl("ACL_USERMEMO_MAINTAIN")
 	public String maintainTodoListEntry() throws Exception{
 		prepareForTodoListMaintain();
 		return SUCCESS;
 	}
 	
+	@Acl("ACL_USERMEMO_MAINTAIN")
 	public String maintainTodoList() throws Exception{		
 		logger.debug("collected date from page: {}", date);
 		userMemoManager.maintainUserMemos(userDetails.getUser().getId(), 

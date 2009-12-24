@@ -1,0 +1,2 @@
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<s:property value="currentUser.userName"/>[<s:property value="currentUser.loginName"/>] @ <s:property value="currentOperatingUnit.name"/>[<s:property value="currentOperatingUnit.type.name"/>]

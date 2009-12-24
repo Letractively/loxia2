@@ -54,6 +54,7 @@
 	</head>
 	<body>
 		<div id="main">
+		<jsp:include page="../commons/header.jsp"/>
 			<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Add New User</div>
 			<div class="ui-widget ui-widget-content ui-corner-bottom" style="background-image: none; overflow: hidden; padding-left: 4px;padding-right: 4px;">
 				<s:form name="addUserForm" id="addUserForm">

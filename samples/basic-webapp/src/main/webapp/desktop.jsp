@@ -115,7 +115,7 @@
 			function deleteUser(userId){
 			}
 			function editTodoList(){
-				var oWin = loxia.openPage('<s:url value="/user/maintaintodolistentry.do" includeParams="none" encode="false"/>','useraddtodowindow',null,[640,400]);
+				var oWin = loxia.openPage('<s:url value="/user/maintaintodolistentry.do?acl=ACL_USERMEMO_MAINTAIN" includeParams="none" encode="false"/>','useraddtodowindow',null,[640,400]);
 				if(!oWin.opener) oWin.opener = self;
 				oWin.focus();
 			}
