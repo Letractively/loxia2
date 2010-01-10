@@ -170,65 +170,60 @@
 		
 			<div class="ui-state-active ui-corner-top" style="margin-bottom: 1px; padding: 2px 6px">Edit User</div>
 			<div class="ui-widget ui-widget-content ui-corner-bottom" style="background-image: none; overflow: hidden; padding-left: 4px;padding-right: 4px;">
-			     <div class="sidenav" id="personal-profile">			
-					<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Personal Profile</span>
-					<a href="#" style="float: right;"><span class="ui-icon ui-icon-triangle-1-n"></span></a>								
-					</div>
-					<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
-						<div id="portrait-container">
-						<div id="portrait">
-						
-						<img src='images/no-photo.gif'/>
-						
-						
-						</div>
-						<div id="portrait-uploader"><img src='images/newspaper.png'/></div>
-						</div>
-					</div>					
-				</div>
+			     
 				<form id="addUserForm" name="addUserForm" action="/basicwebapp/user_modify.jsp" method="post">
 				<input type="hidden" name="struts.token.name" value="struts.token" />
 <input type="hidden" name="struts.token" value="KAJ4862P2Y71HDRZG4SGRNBJ0CP124GW" />
 				<table cellpadding="2" cellspacing="2" border="0" style="width: 100%;">
 					<tr class="odd">
 						<td class="label" style="text-align: right; padding-right: 4px;" width="100px">Login Name:</td>
-						<td width="120px"><input loxiaType="input" name="user.loginName" required="true" trim="true" disabled="disabled" selectonfocus="true" max="20" checkmaster="checkUserUnique,checkLength"  style="width:95%"/></td>
-						<td class="hint">your login name .</td>
+						<td width="120px">Alex Wei</td>
+						<td class="hint"></td>
+						<td rowspan="4">
+							<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
+								<div id="portrait-container">
+								<div id="portrait">
+								
+								<img src='images/no-photo.gif'/>
+								
+								
+								</div>
+								<div id="portrait-uploader"><img src='images/newspaper.png'/></div>
+								</div>
+							</div>
+						</td>
 					</tr>
 					<tr class="even">
 						<td class="label" style="text-align: right; padding-right: 4px;">Password:</td>
 						<td width="120px"><input loxiaType="input" name="user.password"  trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength"/></td>
 						<td class="hint">change the password or leave it alone if not.</td>
+						
 					</tr>
 					<tr class="odd">
 						<td class="label" style="text-align: right; padding-right: 4px;">User Name:</td>
 						<td width="120px"><input loxiaType="input" name="user.userName" required="true" trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength"/></td>
 						<td class="hint">Write the real user name.</td>
 					</tr>
-					<tr class="odd">
-						<td class="label" style="text-align: right; padding-right: 4px;">Habbit:</td>
-						<td width="120px"> <input loxiaType="input" name="user.habbit" required="true" trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength" style="width:95%"/></td>
-						<td class="hint">new habbit.</td>
-					</tr>
 					<tr class="even">
-						<td class="label" style="text-align: right; padding-right: 4px;">Description:</td>
-						<td width="120px"><textarea name="input" loxiaType="input" name="user.description"  trim="true" selectonfocus="true" style="width:95%"></textarea></td>
-						<td class="hint">new description.</td>
-					</tr>
-					<tr class="odd">
-						<td class="label" style="text-align: right; padding-right: 4px;">System User?:</td>
-						<td><input type="checkbox" name="user.isSystem" value="true" id="addUserForm_user_isSystem"/>
-<input type="hidden" id="__checkbox_addUserForm_user_isSystem" name="__checkbox_user.isSystem" value="true" /> </td>
-						<td class="hint">Is this user a system one or not</td>
+						<td class="label" style="text-align: right; padding-right: 4px;">Habbit:</td>
+						<td width="120px">User Habbit</td>
+						<td class="hint"></td>
 					</tr>
 					
 				</table>
+				<table>
+					<tr class="odd">
+						<td class="label" style="text-align: right; padding-right: 4px;">Description:</td>
+						<td width="420px" ><textarea rows="5" name="input" loxiaType="input" name="user.description"  trim="true" selectonfocus="true" style="width:100%"></textarea></td>
+					</tr>
+					<tr class="even">
+						<td class="label" style="text-align: right; padding-right: 4px;">System User?:</td>
+						<td>true
+<input type="hidden" id="__checkbox_addUserForm_user_isSystem" name="__checkbox_user.isSystem" value="true" /> </td>
+						
+					</tr>
+				</table>
 				</form>
-
-
-
-
-				
 				<div class="buttonbar">
 					<input type="button" loxiaType="button" value="Edit" onclick="addUser();"/>
 				</div>
