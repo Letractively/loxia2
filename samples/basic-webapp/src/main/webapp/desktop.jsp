@@ -90,6 +90,20 @@
 	   			 				$j('#up-portrait-dlg').loxiadialog("close");
 			   			 	 }}]
 				};
+			var deleteUserDlgSettings = {modal: true,
+					autoOpen: false,
+					resizable: false,
+					width: 400,
+					buttons :[{value:"Cancel", 
+				   			 func : function(){
+			   					$j('#delete-user-dlg').loxiadialog("close");
+			   				 }},
+		   					{value:"Delete", 
+				   			 func : function(){
+			   					deleteUser();
+	   			 				$j('#delete-user-dlg').loxiadialog("close");
+			   			 	 }}]
+				};
 			var t1Settings = $j.extend({
 					url: '<s:url value="/commons/getusersindesktop.do" includeParams="none" encode="false"/>'
 				}, <s:property value="#session.userTableModel.model" escape="false"/>);
@@ -101,7 +115,7 @@
 				var result = "";
 				result += '<img title="add/modify user information" src="<s:url value='/images/pencil.gif' includeParams='none' encode='false'/>" onclick="editUserInfo(' + data.id + ')"></img>';
 				if(!data.system)
-					result += '<img title="delete user" src="<s:url value='/images/trash.gif' includeParams='none' encode='false'/>" onclick="deleteUser(' + data.id + ')"></img>';
+					result += '<img title="delete user" src="<s:url value='/images/trash.gif' includeParams='none' encode='false'/>" onclick="innerDeleteUser(' + data.id + ')"></img>';
 				result += '<div class="clearer"><span></span></div>';
 				return result;
 			}
@@ -109,11 +123,22 @@
 				var oWin = loxia.openPage('<s:url value="/user/adduserentry.do" includeParams="none" encode="false"/>','useraddwindow',null,[640,400]);
 				if(!oWin.opener) oWin.opener = self;
 				oWin.focus();				
-			}			
+			}				
 			function editUserInfo(userId){
 			}
-			function deleteUser(userId){
+			var delUserId = 0;
+			function innerDeleteUser(userId){
+				delUserId = userId;
+				$j('#delete-user-dlg').loxiadialog("open");
 			}
+			function deleteUser(){
+				var data = loxia.syncXhrGet("<s:url value='/user/deleteuser.do?acl=ACL_USERMEMO_MAINTAIN' encode='false' includeParams='none'/>",{data: {"user.id": delUserId}});
+				if(data.result){
+					$userlistTable.reload();
+				}else{
+					showErrorMsg(data.exception.message || "System Error.");
+				}
+			}	
 			function editTodoList(){
 				var oWin = loxia.openPage('<s:url value="/user/maintaintodolistentry.do?acl=ACL_USERMEMO_MAINTAIN" includeParams="none" encode="false"/>','useraddtodowindow',null,[640,400]);
 				if(!oWin.opener) oWin.opener = self;
@@ -203,6 +228,9 @@
 			<form id="uploadForm" action='<s:url value="/uploadportrait.do"/>' method="post" enctype="multipart/form-data" target="hiddenIframe">
 				<p style="padding-left: 10px; padding-top: 20px;">Please choose your portrait: <input type="file" name="portrait" class="ui-state-default"/></p>
 			</form>
+		</div>
+		<div loxiaType="dialog" settings="deleteUserDlgSettings" id="delete-user-dlg" title="Confirm to Delete">
+			<p>Do you confirm to remove this user? User will not be recoved after deletion.</p>
 		</div>
 		<iframe src="/commons/attach_result.jsp" id="hiddenIframe"  name="hiddenIframe" style="display: none;"></iframe>		
 	</body>
