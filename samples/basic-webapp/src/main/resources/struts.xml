@@ -73,7 +73,8 @@
 		<action name="maintaintodolist" method="maintainTodoList" class="userMaintainAction">
 			<result>/user/user_maintain_todolist.jsp</result>
 		</action>
-		<action name="adduser" method="addUser" class="userMaintainAction"/>		
+		<action name="adduser" method="addUser" class="userMaintainAction"/>
+		<action name="deleteuser" method="deleteUser" class="userMaintainAction"/>		
 	</package>
 	<package name="commons" extends="default" namespace="/commons">
 		<action name="getattachment" class="getAttachmentAction">
