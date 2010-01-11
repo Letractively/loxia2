@@ -8,6 +8,9 @@
 	<named-query name="User.findByLoginName">
 		<query><![CDATA[select u from cn.benjamin.loxia.model.User u where u.loginName = :loginName]]></query>
 	</named-query>
+	<named-query name="User.deleteUserbyUserId">
+		<query><![CDATA[update cn.benjamin.loxia.model.User set isAvailable = 0 where id = :userId]]></query>
+	</named-query>
 	<named-query name="UserMemo.findUserMemosByUserIdAndDate">
 		<query><![CDATA[select um from UserMemo um where um.user.id = :userId and um.memoDate = :date order by um.id]]></query>
 	</named-query>	
