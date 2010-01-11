@@ -8,6 +8,7 @@ import java.util.Map;
 
 import cn.benjamin.loxia.examples.dao.UserDao;
 import cn.benjamin.loxia.examples.dao.UserMemoDao;
+import cn.benjamin.loxia.examples.manager.UserManager;
 import cn.benjamin.loxia.examples.manager.UserMemoManager;
 import cn.benjamin.loxia.examples.model.UserMemo;
 import cn.benjamin.loxia.model.User;
@@ -30,7 +31,8 @@ public class UserMaintainAction extends BaseProfileAction {
 
 	private List<UserMemo> userMemos = new ArrayList<UserMemo>();	
 
-	private UserDao userDao;	
+	private UserDao userDao;
+	private UserManager userManager;
 	private UserMemoDao userMemoDao;	
 	private UserMemoManager userMemoManager;	
 
@@ -81,6 +83,17 @@ public class UserMaintainAction extends BaseProfileAction {
 		return JSON;
 	}
 	
+	@Acl(value="ACL_USERMEMO_MAINTAIN")
+	@SuppressWarnings("unchecked")
+	@DataResponse
+	public String deleteUser() throws Exception{
+		userManager.deleteUser(user.getId());
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", true);
+		request.put("json", new JSONObject(result));
+		return JSON;
+	}
+	
 	public User getUser() {
 		return user;
 	}
@@ -123,5 +136,13 @@ public class UserMaintainAction extends BaseProfileAction {
 
 	public void setUserMemoManager(UserMemoManager userMemoManager) {
 		this.userMemoManager = userMemoManager;
+	}
+	
+	public UserManager getUserManager() {
+		return userManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
 	}
 }
