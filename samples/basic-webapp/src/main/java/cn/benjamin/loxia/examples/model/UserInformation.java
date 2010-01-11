@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.OptimisticLockType;
 
@@ -24,6 +25,7 @@ import cn.benjamin.loxia.model.User;
 @Table(name="T_BI_USER_INFO")
 @org.hibernate.annotations.Proxy(lazy=false)
 @org.hibernate.annotations.Entity(optimisticLock=OptimisticLockType.VERSION)
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 public class UserInformation extends BaseModel {
 
 	/**
