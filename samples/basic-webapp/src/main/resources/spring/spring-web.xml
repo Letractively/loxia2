@@ -8,7 +8,8 @@
 		<property name="userMemoDao" ref="userMemoDao"/>
 	</bean>
 	<bean id="userMaintainAction" class="cn.benjamin.loxia.examples.action.UserMaintainAction" scope="request">	
-		<property name="userDao" ref="userDao"/>	
+		<property name="userDao" ref="userDao"/>
+		<property name="userManager" ref="userManager"/>	
 		<property name="userMemoDao" ref="userMemoDao"/>
 		<property name="userMemoManager" ref="userMemoManager"/>
 	</bean>
