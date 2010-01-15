@@ -33,7 +33,8 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 
 	private UserInformationManager userInformationManager;	
 	private UserInformationDao userInformationDao;	
-	private UserMemoDao userMemoDao;	
+	private UserMemoDao userMemoDao;
+	
 
 	@SuppressWarnings("unchecked")
 	Map session;
@@ -46,6 +47,8 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() throws Exception{
+		
+		
 		UsersTableModel userTableModel = new UsersTableModel();
 		userTableModel.setUserInformationDao(userInformationDao);
 		userTableModel.setItemPerPage(10);
@@ -111,7 +114,11 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 		}
 		return SUCCESS;
 	}
-	
+	public boolean checkAcl(String [] acls)
+	{
+		
+		return userDetails.checkAuthority(acls);
+	}
 	public String getUserInfo(){		
 		return userDetails.getUser().getUserName() + "[" + userDetails.getUsername() + "]";
 	}
