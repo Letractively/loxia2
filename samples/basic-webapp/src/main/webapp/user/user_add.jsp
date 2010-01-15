@@ -50,6 +50,22 @@
 				}else 
 					$info.hide();
 			}
+
+			function checkLoginName(value,obj)
+			{
+				
+				 var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[\-_]){6,20}$/;  
+				 if (!patrn.exec(value)) return 'Unacceptable login name,just accept a-Z,0-9,-,_';
+				 return loxia.SUCCESS; 
+			}
+
+			function checkLength(value, obj){
+				if(value.length > 20)
+					return "please keep your length less-than 20";
+				if(obj.name="user.password" && value.length <6 )
+					return "password length must greater-than 6"
+				return loxia.SUCCESS;
+			}
 		</script>
 	</head>
 	<body>
@@ -62,24 +78,30 @@
 				<table cellpadding="2" cellspacing="2" border="0" style="width: 100%;">
 					<tr class="odd">
 						<td class="label" style="text-align: right; padding-right: 4px;" width="100px">Login Name:</td>
-						<td width="120px"><input loxiaType="input" name="user.loginName" required="true" trim="true" selectonfocus="true" checkmaster="checkUserUnique" style="width:95%"/></td>
+						<td width="120px"><input loxiaType="input" name="user.loginName" required="true" trim="true" selectonfocus="true"  checkmaster="checkUserUnique,checkLength,checkLoginName" style="width:95%"/></td>
 						<td class="hint">Choose one login name which should be unique in system.</td>
 					</tr>
 					<tr class="even">
 						<td class="label" style="text-align: right; padding-right: 4px;">Password:</td>
-						<td><input loxiaType="input" name="user.password" required="true" trim="true" selectonfocus="true" style="width:95%"/></td>
+						<td width="120px"><input loxiaType="input" name="user.password" required="true" trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength"/></td>
 						<td class="hint">Set the initial password</td>
 					</tr>
 					<tr class="odd">
 						<td class="label" style="text-align: right; padding-right: 4px;">User Name:</td>
-						<td><input loxiaType="input" name="user.userName" required="true" trim="true" selectonfocus="true" style="width:95%"/></td>
+						<td width="120px"><input loxiaType="input" name="user.userName" required="true" trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength"/></td>
 						<td class="hint">Write the real user name.</td>
 					</tr>
 					<tr class="even">
+						<td class="label" style="text-align: right; padding-right: 4px;">Description:</td>
+						<td width="240px" ><textarea loxiaType="input" name="userInformation.description" trim="true" selectonfocus="true" style="width:95%" rows="5" ></textarea></td>
+						<td class="hint">Write down the user description.</td>
+					</tr>
+					<tr class="odd">
 						<td class="label" style="text-align: right; padding-right: 4px;">System User?:</td>
 						<td><s:checkbox name="user.isSystem"/></td>
 						<td class="hint">Is this user a system one or not</td>
 					</tr>
+					
 				</table>
 				</s:form>
 				<div class="buttonbar">

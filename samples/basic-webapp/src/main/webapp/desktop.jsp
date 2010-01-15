@@ -113,7 +113,9 @@
 			}, <s:property value="#session.umTableModel.model" escape="false"/>);
 			function genUserListOpTd(data){
 				var result = "";
+				result +='<s:if test="checkAcl(new java.lang.String[]{\'ACL_USER_MAINTAIN\'})"> '
 				result += '<img title="add/modify user information" src="<s:url value='/images/pencil.gif' includeParams='none' encode='false'/>" onclick="editUserInfo(' + data.id + ')"></img>';
+				result +='</s:if>'
 				if(!data.system)
 					result += '<img title="delete user" src="<s:url value='/images/trash.gif' includeParams='none' encode='false'/>" onclick="innerDeleteUser(' + data.id + ')"></img>';
 				result += '<div class="clearer"><span></span></div>';
@@ -125,6 +127,15 @@
 				oWin.focus();				
 			}				
 			function editUserInfo(userId){
+
+				
+				var url='<s:url value="/user/edituserentry.do"/>';
+				var url1=url+'?user.id='+userId
+				
+				
+				var oWin = loxia.openPage(url1,'useraddwindow',null,[640,400]);
+				if(!oWin.opener) oWin.opener = self;
+				oWin.focus();
 			}
 			var delUserId = 0;
 			function innerDeleteUser(userId){
@@ -178,7 +189,9 @@
 				</div>
 				<p></p>
 				<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Current User List</span>
+				<s:if test="checkAcl(new java.lang.String[]{'ACL_USER_MAINTAIN'})">
 				<a class="rtmenu" title="Add new users here" href="#" onclick="addUser();return false;" style="float: right;"><span style="background: url('images/plus.png') right bottom no-repeat;">New User</span></a>
+				</s:if>
 				</div>
 				<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden; padding-bottom: 4px;">
 				<table id="userlist-table" loxiaType="table" settings="t1Settings" cellpadding="0" cellspacing="0">

@@ -20,7 +20,7 @@
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider" />            
             
             <!-- cache configuration -->
-         	<property name="hibernate.ejb.classcache.cn.benjamin.loxia.model.User" value="read-only"/>
+         	<property name="hibernate.ejb.classcache.cn.benjamin.loxia.model.User" value="read-write"/>
          	<property name="hibernate.ejb.classcache.cn.benjamin.loxia.model.Role" value="read-only"/>
          	<property name="hibernate.ejb.classcache.cn.benjamin.loxia.model.Privilege" value="read-only"/>
          	<property name="hibernate.ejb.classcache.cn.benjamin.loxia.model.PrivilegeType" value="read-only"/>

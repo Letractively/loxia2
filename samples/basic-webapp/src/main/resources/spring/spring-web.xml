@@ -12,6 +12,8 @@
 		<property name="userManager" ref="userManager"/>	
 		<property name="userMemoDao" ref="userMemoDao"/>
 		<property name="userMemoManager" ref="userMemoManager"/>
+		<property name="userInformationDao" ref="userInformationDao"/>
+		<property name="userInformationManager" ref="userInformationManager"></property>
 	</bean>
 	<bean id="getAttachmentAction" class="cn.benjamin.loxia.examples.action.GetAttachmentAction" scope="request">
 		<property name="userInformationManager" ref="userInformationManager"/>

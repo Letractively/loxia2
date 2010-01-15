@@ -34,6 +34,7 @@ public class UserInformationManagerImpl implements UserInformationManager {
 			ui.setUser(userDao.getByPrimaryKey(userInfor.getUser().getId()));
 			if(ui.getUser() == null) throw new RuntimeException("User should be existed.");
 		}
+		ui.setDescription(userInfor.getDescription());
 		ui.setHabbit(userInfor.getHabbit());
 		ui.setPortrait(userInfor.getPortrait());
 		return userInformationDao.save(ui);		

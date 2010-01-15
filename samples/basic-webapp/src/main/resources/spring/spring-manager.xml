@@ -13,5 +13,6 @@
 	</bean>
 	<bean id="userManager" class="cn.benjamin.loxia.examples.manager.impl.UserManagerImpl">
 		<property name="userDao" ref="userDao"/>
+		<property name="userInformationManager" ref="userInformationManager"></property>
 	</bean>
 </beans>
