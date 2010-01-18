@@ -12,6 +12,7 @@ import cn.benjamin.loxia.examples.manager.UserInformationManager;
 import cn.benjamin.loxia.examples.manager.UserManager;
 import cn.benjamin.loxia.examples.model.UserInformation;
 import cn.benjamin.loxia.model.User;
+import cn.benjamin.loxia.utils.DateUtil;
 import cn.benjamin.loxia.utils.PropertyUtil;
 
 @Transactional
@@ -40,6 +41,7 @@ public class UserManagerImpl implements UserManager{
     	
     	userInformation.setPortrait(userInformationManager.getPortraitByUserId(user.getId()));
     	userInformation.setUser(user);
+    	user.setCreateTime(DateUtil.now());
 		userDao.save(user);
 		if(userInformation != null)
 			userInformationManager.saveOrUpdate(userInformation);
