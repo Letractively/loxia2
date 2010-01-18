@@ -74,7 +74,7 @@
 			<result>/user/user_maintain_todolist.jsp</result>
 		</action>
 		<action name="adduser" method="addUser" class="userMaintainAction"/>
-		<action name="deleteuser" method="deleteUser" class="userMaintainAction"/>	
+		<action name="deleteuser" method="deleteUser" class="userMaintainAction"/>
 		<action name="edituserentry" method="editUser" class="userMaintainAction">
 			<result name="json">/user/user_modify.jsp</result>
 		</action>
@@ -82,6 +82,9 @@
 		<action name="uploadportrait" method="uploadPortrait" class="userMaintainAction">
 			<result>/commons/attach_result.jsp</result>
 		</action>		
+		<action name="viewuser" method="viewUser" class="userMaintainAction"/>
+		<action name="updatehabbit" method="updateHabbit" class="userMaintainAction"/>
+		<action name="updatedescription" method="updateDescription" class="userMaintainAction"/>				
 	</package>
 	<package name="commons" extends="default" namespace="/commons">
 		<action name="getattachment" class="getAttachmentAction">
