@@ -41,7 +41,8 @@ public class UserManagerImpl implements UserManager{
     	userInformation.setPortrait(userInformationManager.getPortraitByUserId(user.getId()));
     	userInformation.setUser(user);
 		userDao.save(user);
-		userInformationManager.saveOrUpdate(userInformation);
+		if(userInformation != null)
+			userInformationManager.saveOrUpdate(userInformation);
 	}
 	
 	public UserInformationManager getUserInformationManager() {

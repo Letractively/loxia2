@@ -7,4 +7,6 @@ public interface UserInformationManager {
 	UserInformation saveOrUpdate(UserInformation userInfor);
 	byte[] getPortraitByUserInfoId(Long userInfoId);
 	byte[] getPortraitByUserId(Long userId);
+	UserInformation updateHabbit(Long userId, String habbit);
+	UserInformation updateDescription(Long userId, String description);
 }

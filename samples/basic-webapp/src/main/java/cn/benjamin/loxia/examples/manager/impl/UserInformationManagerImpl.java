@@ -55,6 +55,30 @@ public class UserInformationManagerImpl implements UserInformationManager {
 			return null;
 		return ui.getPortrait();
 	}
+	
+	public UserInformation updateHabbit(Long userId, String habbit){
+		if(userId == null) throw new IllegalArgumentException();
+		UserInformation ui = userInformationDao.findUserInformationByUser(userId);
+		if(ui == null){
+			ui = new UserInformation();
+			ui.setUser(userDao.getByPrimaryKey(userId));
+			if(ui.getUser() == null) throw new RuntimeException("User should be existed.");
+		}
+		ui.setHabbit(habbit);
+		return userInformationDao.save(ui);
+	}
+	
+	public UserInformation updateDescription(Long userId, String description){
+		if(userId == null) throw new IllegalArgumentException();
+		UserInformation ui = userInformationDao.findUserInformationByUser(userId);
+		if(ui == null){
+			ui = new UserInformation();
+			ui.setUser(userDao.getByPrimaryKey(userId));
+			if(ui.getUser() == null) throw new RuntimeException("User should be existed.");
+		}
+		ui.setDescription(description);
+		return userInformationDao.save(ui);
+	}
 
 	public UserInformationDao getUserInformationDao() {
 		return userInformationDao;
