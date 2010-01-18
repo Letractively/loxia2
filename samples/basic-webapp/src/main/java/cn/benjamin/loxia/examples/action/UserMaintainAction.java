@@ -28,6 +28,7 @@ import cn.benjamin.loxia.utils.PropertyUtil;
 import cn.benjamin.loxia.web.BaseProfileAction;
 import cn.benjamin.loxia.web.annotation.Acl;
 import cn.benjamin.loxia.web.annotation.DataResponse;
+import cn.benjamin.loxia.utils.DateUtil;
 
 public class UserMaintainAction extends BaseProfileAction {
 
@@ -87,6 +88,7 @@ public class UserMaintainAction extends BaseProfileAction {
 		ou.setId(1l);
 		user.setOu(ou);
 		userInformation.setUser(user);
+		user.setCreateTime(DateUtil.now());
 		user = userDao.save(user);
 		userInformationManager.saveOrUpdate(userInformation);
 		Map<String,Object> result = new HashMap<String, Object>();
