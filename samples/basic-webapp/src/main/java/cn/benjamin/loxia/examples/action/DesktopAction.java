@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.security.context.SecurityContextHolder;
 
 import cn.benjamin.loxia.dao.Sort;
+import cn.benjamin.loxia.examples.dao.UserDao;
 import cn.benjamin.loxia.examples.dao.UserInformationDao;
 import cn.benjamin.loxia.examples.dao.UserMemoDao;
 import cn.benjamin.loxia.examples.manager.UserInformationManager;
@@ -34,7 +35,15 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 	private UserInformationManager userInformationManager;	
 	private UserInformationDao userInformationDao;	
 	private UserMemoDao userMemoDao;
-	
+	private UserDao userDao;
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
 
 	@SuppressWarnings("unchecked")
 	Map session;
@@ -63,6 +72,7 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 			PropertyUtil.copyProperties(ui, retUi, new PropListCopyable("id","habbit","description"));
 			request.put("userInformation", retUi);
 		}
+		request.put("user", userDao.getByPrimaryKey(userDetails.getUser().getId()));
 		return SUCCESS;
 	}
 
@@ -103,7 +113,7 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 					userInformationManager.updatePortrait(userDetails.getUser().getId(), portraits);
 				UserInformation ui = new UserInformation();
 				PropertyUtil.copyProperties(infor, ui, new PropListCopyable("id","habbit","description"));
-				request.put("userInformation", infor);
+				request.put("userInformation", ui);
 			}else{
 				request.put("errorMessage", "Invalid picture.");
 			}

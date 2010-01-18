@@ -2,6 +2,7 @@ package cn.benjamin.loxia.examples.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,11 +51,10 @@ public class UserMaintainAction extends BaseProfileAction {
 	private UserDao userDao;
 	private UserManager userManager;
 	private UserMemoDao userMemoDao;	
-	private UserMemoManager userMemoManager;	
-	private UserInformationDao userInformationDao;	
+	private UserMemoManager userMemoManager;
+	private UserInformationDao userInformationDao;
 	private UserInformationManager userInformationManager;
 	
-
 	@SuppressWarnings("unchecked")
 	private void prepareForTodoListMaintain(){
 		
@@ -157,40 +157,6 @@ public class UserMaintainAction extends BaseProfileAction {
 		request.put("json", new JSONObject(result));
 		return JSON;
 	}
-	
-	public String getPortraitContentType() {
-		return portraitContentType;
-	}
-
-	public void setPortraitContentType(String portraitContentType) {
-		this.portraitContentType = portraitContentType;
-	}
-
-	public String getPortraitFileName() {
-		return portraitFileName;
-	}
-
-	public void setPortraitFileName(String portraitFileName) {
-		this.portraitFileName = portraitFileName;
-	}
-
-	public File getPortrait() {
-		return portrait;
-	}
-
-	public void setPortrait(File portrait) {
-		this.portrait = portrait;
-	}
-
-	public UserInformationManager getUserInformationManager() {
-		return userInformationManager;
-	}
-
-	public void setUserInformationManager(
-			UserInformationManager userInformationManager) {
-		this.userInformationManager = userInformationManager;
-	}
-
 
 	@Acl(value="ACL_USERMEMO_MAINTAIN")
 	@SuppressWarnings("unchecked")
@@ -200,6 +166,34 @@ public class UserMaintainAction extends BaseProfileAction {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("result", true);
 		request.put("json", new JSONObject(result));
+		return JSON;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@DataResponse
+	public String viewUser() throws Exception{
+		User u = userDao.getByPrimaryKey(user.getId());
+		UserInformation ui = userInformationDao.findUserInformationByUser(user.getId());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userName", u.getUserName());
+		map.put("createTime", u.getCreateTime());
+		map.put("latestUpdateTime", u.getLatestUpdateTime());
+		if(ui != null){
+			map.put("habbit", ui.getHabbit());
+			map.put("description", ui.getDescription());
+			map.put("portrait", ui.getPortrait());
+		}
+			request.put("json", new JSONObject(map));
+		return JSON;
+	}
+	
+	public String updateHabbit() {
+		userInformationManager.updateHabbit(user.getId(), userInformation.getHabbit());
+		return JSON;
+	}
+	
+	public String updateDescription() {
+		userInformationManager.updateDescription(user.getId(), userInformation.getDescription());
 		return JSON;
 	}
 	
@@ -273,4 +267,36 @@ public class UserMaintainAction extends BaseProfileAction {
 		this.userManager = userManager;
 	}
 
+	public String getPortraitContentType() {
+		return portraitContentType;
+	}
+
+	public void setPortraitContentType(String portraitContentType) {
+		this.portraitContentType = portraitContentType;
+	}
+
+	public String getPortraitFileName() {
+		return portraitFileName;
+	}
+
+	public void setPortraitFileName(String portraitFileName) {
+		this.portraitFileName = portraitFileName;
+	}
+
+	public File getPortrait() {
+		return portrait;
+	}
+
+	public void setPortrait(File portrait) {
+		this.portrait = portrait;
+	}
+
+	public UserInformationManager getUserInformationManager() {
+		return userInformationManager;
+	}
+
+	public void setUserInformationManager(
+			UserInformationManager userInformationManager) {
+		this.userInformationManager = userInformationManager;
+	}
 }
