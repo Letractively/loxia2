@@ -90,7 +90,9 @@
 				$j('#user-info-drag').hide().draggable({handle: 'div.ui-state-active',
 					containment: 'window'}).center();
 				$j('#ihabbit').removeClass("ui-state-default").toggleClass("ihabbit").blur(function(){editHabbit($j(this).val())});
-				
+				$j('#personal-profile p:last').click(function(){
+						$j('#edit-des-dlg').loxiadialog("open");
+					})
 			});	
 			var upPortraitDlgSettings = {modal: true,
 					autoOpen: false,
@@ -129,7 +131,7 @@
 		   					{value:"Submit", 
 				   			 func : function(){
 			   					$j("#editDesForm").submit();
-			   					$j("#idescription").text();
+			   					$j("#idescription").text("").text($j("#edit-des-dlg textarea").val());
 	   			 				$j('#edit-des-dlg').loxiadialog("close");
 			   			 	 }}]
 				};
@@ -292,7 +294,7 @@
 						<p><b>Last Update Time:</b><span style="padding-left:10px"><s:property value="#request.user.latestUpdateTime"/></span></p>
 						<p><b>Habbit:</b><span style="padding-left:10px"><input loxiaType="input" name="" value='<s:property value="#request.userInformation.habbit"/>' 
 							trim="true" max="20" onblur="" id="ihabbit"/></span></p>
-						<p><b>Description:</b><span style="padding-left:10px"><s:property value="#request.userInformation.description"/></span></p>
+						<p><b>Description:</b><span style="padding-left:10px" id="idescription"><s:property value="#request.userInformation.description"/></span></p>
 					</div>					
 				</div>
 				<div class="clearer"><span></span></div>
@@ -309,8 +311,9 @@
 			<p>Do you confirm to remove this user? User will not be recoved after deletion.</p>
 		</div>
 		<div loxiaType="dialog" settings="editDesDlgSettings" id="edit-des-dlg" title="Edit Description">
-			<form id="editDesForm" action='<s:url value="/edituserself.do"/>' method="post">
-				<p style="padding-left: 10px; padding-top: 20px;">Description: <textarea name="user.description" loxiaType="input"></textarea></p>
+			<form id="editDesForm" action='<s:url value="/user/updatedescription.do"/>' method="post" enctype="multipart/form-data" target="hiddenIframe">
+				<s:hidden name="user.id" value="%{currentUser.id}"/>
+				<p style="padding-left: 10px; padding-top: 20px;">Description: <textarea name="userInformation.description" loxiaType="input" rows="5" style="width:100%"></textarea></p>
 			</form>
 		</div>		
 		<div id="user-info-drag" class="sidenav">
