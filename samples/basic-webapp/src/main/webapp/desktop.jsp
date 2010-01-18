@@ -28,6 +28,9 @@
 			a.rtmenu, a.rtmenu:visited {color: #EBEBEB;}
 			a.rtmenu:hover{color: #FFFF00;}
 			a.rtmenu span{padding-right: 18px;}
+			#user-info-drag {width: 400px; height: 250px; padding: 0.5em;}
+			p {font-size: 9px}
+			.ihabbit {border: 0px; background:inherit;}
 		</style>
 		<script type="text/javascript">		
 			var $portrait;
@@ -41,11 +44,15 @@
 				$j(".sidenav .ui-state-active a").hover(function(){
 						$j(this).find(".ui-icon-triangle-1-n").removeClass("ui-icon-triangle-1-n").addClass("ui-icon-circle-triangle-n");
 						$j(this).find(".ui-icon-triangle-1-s").removeClass("ui-icon-triangle-1-s").addClass("ui-icon-circle-triangle-s");
+						$j(this).find(".ui-icon-close").removeClass("ui-icon-close").addClass("ui-icon-circle-close");
 					},function(){
 						$j(this).find(".ui-icon-circle-triangle-n").removeClass("ui-icon-circle-triangle-n").addClass("ui-icon-triangle-1-n");
 						$j(this).find(".ui-icon-circle-triangle-s").removeClass("ui-icon-circle-triangle-s").addClass("ui-icon-triangle-1-s");
+						$j(this).find(".ui-icon-circle-close").removeClass("ui-icon-circle-close").addClass("ui-icon-close");
 					});
 				$j(".sidenav .ui-state-active a").click(function(){
+					var aId = $j(this).attr("id");
+					if(aId == "triangle"){
 						var $content = $j(this).parents(".sidenav").find(".ui-widget-content");
 						if($content.data("isHidden")){	
 							$content.data("isHidden",false);
@@ -60,7 +67,11 @@
 							$content.hide();															
 							$content.animate({height:0},"slow");	
 						}
-					});
+					}else if(aId == "close"){
+						$j(this).find(".ui-icon-circle-close").removeClass("ui-icon-circle-close").addClass("ui-icon-close");
+						$j('#user-info-drag').center().hide('clip',null,500,null);
+					}
+				});
 				$j("#portrait-container").hover(function(){
 						$j(this).addClass("show");
 					},function(){
@@ -76,6 +87,10 @@
 							$j(this).removeClass("hover");
 					});
 					});
+				$j('#user-info-drag').hide().draggable({handle: 'div.ui-state-active',
+					containment: 'window'}).center();
+				$j('#ihabbit').removeClass("ui-state-default").toggleClass("ihabbit").blur(function(){editHabbit($j(this).val())});
+				
 			});	
 			var upPortraitDlgSettings = {modal: true,
 					autoOpen: false,
@@ -104,6 +119,20 @@
 	   			 				$j('#delete-user-dlg').loxiadialog("close");
 			   			 	 }}]
 				};
+			var editDesDlgSettings = {modal: true,
+					autoOpen: false,
+					width: 400,
+					buttons :[{value:"Cancel", 
+				   			 func : function(){
+			   					$j('#edit-des-dlg').loxiadialog("close");
+			   				 }},
+		   					{value:"Submit", 
+				   			 func : function(){
+			   					$j("#editDesForm").submit();
+			   					$j("#idescription").text();
+	   			 				$j('#edit-des-dlg').loxiadialog("close");
+			   			 	 }}]
+				};
 			var t1Settings = $j.extend({
 					url: '<s:url value="/commons/getusersindesktop.do" includeParams="none" encode="false"/>'
 				}, <s:property value="#session.userTableModel.model" escape="false"/>);
@@ -114,6 +143,7 @@
 			function genUserListOpTd(data){
 				var result = "";
 				result +='<s:if test="checkAcl(new java.lang.String[]{\'ACL_USER_MAINTAIN\'})"> '
+				result += '<img title="view user" src="images/magnifier.gif" onclick="viewUserInfo(' + data.id + ')"></img>';
 				result += '<img title="add/modify user information" src="<s:url value='/images/pencil.gif' includeParams='none' encode='false'/>" onclick="editUserInfo(' + data.id + ')"></img>';
 				result +='</s:if>'
 				if(!data.system)
@@ -149,11 +179,39 @@
 				}else{
 					showErrorMsg(data.exception.message || "System Error.");
 				}
-			}	
+			}
+			function viewUserInfo(userId){
+				var data = loxia.syncXhrGet("<s:url value='/user/viewuser.do' encode='false' includeParams='none'/>",{data: {"user.id": userId}});
+				$j('#name').text("");
+				$j('#createTime').text("");
+				$j('#latestUpdateTime').text("");
+				$j('#habbit').text("");
+				$j('#description').text("");
+				
+				$j('#name').text(data.userName);
+				$j('#createTime').text(data.createTime);
+				$j('#latestUpdateTime').text(data.latestUpdateTime);
+				$j('#habbit').text(data.habbit);
+				$j('#description').text(data.description);
+				if($j('#user-info-drag').css('display') == 'none')
+					$j('#user-info-drag').show('clip',null,500,null);		
+			}
+			function editHabbit(value){
+				if(value != "" && value.length > 0){
+					loxia.syncXhrGet("<s:url value='/user/updatehabbit.do' encode='false' includeParams='none'/>",
+						{data: {"user.id": <s:property value="currentUser.id"/>, "userInformation.habbit": value}});
+				}
+			}		
 			function editTodoList(){
 				var oWin = loxia.openPage('<s:url value="/user/maintaintodolistentry.do?acl=ACL_USERMEMO_MAINTAIN" includeParams="none" encode="false"/>','useraddtodowindow',null,[640,400]);
 				if(!oWin.opener) oWin.opener = self;
 				oWin.focus();
+			}
+			$j.fn.center = function () {
+				this.css("position","absolute");
+				this.css("top", ( $j(window).height() - this.height() ) / 2+$j(window).scrollTop() + "px");
+				this.css("left", ( $j(window).width() - this.width() ) / 2+$j(window).scrollLeft() + "px");
+				return this;
 			}
 		</script>
 	</head>
@@ -215,7 +273,7 @@
 				</div>
 				<div class="sidenav" id="personal-profile">			
 					<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Personal Profile</span>
-					<a href="#" style="float: right;"><span class="ui-icon ui-icon-triangle-1-n"></span></a>								
+					<a href="#" style="float: right;" id="triangle"><span class="ui-icon ui-icon-triangle-1-n"></span></a>								
 					</div>
 					<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
 						<div id="portrait-container">
@@ -229,7 +287,12 @@
 						</div>
 						<div id="portrait-uploader"><img src='<s:url value="/images/newspaper.png"/>'/></div>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<p><b>Name:</b><span style="padding-left:10px"><s:property value="#request.user.userName"/></span></p>
+						<p><b>Attend Time:</b><span style="padding-left:10px"><s:property value="#request.user.createTime"/></span></p>
+						<p><b>Last Update Time:</b><span style="padding-left:10px"><s:property value="#request.user.latestUpdateTime"/></span></p>
+						<p><b>Habbit:</b><span style="padding-left:10px"><input loxiaType="input" name="" value='<s:property value="#request.userInformation.habbit"/>' 
+							trim="true" max="20" onblur="" id="ihabbit"/></span></p>
+						<p><b>Description:</b><span style="padding-left:10px"><s:property value="#request.userInformation.description"/></span></p>
 					</div>					
 				</div>
 				<div class="clearer"><span></span></div>
@@ -244,6 +307,36 @@
 		</div>
 		<div loxiaType="dialog" settings="deleteUserDlgSettings" id="delete-user-dlg" title="Confirm to Delete">
 			<p>Do you confirm to remove this user? User will not be recoved after deletion.</p>
+		</div>
+		<div loxiaType="dialog" settings="editDesDlgSettings" id="edit-des-dlg" title="Edit Description">
+			<form id="editDesForm" action='<s:url value="/edituserself.do"/>' method="post">
+				<p style="padding-left: 10px; padding-top: 20px;">Description: <textarea name="user.description" loxiaType="input"></textarea></p>
+			</form>
+		</div>		
+		<div id="user-info-drag" class="sidenav">
+			<div class="ui-state-active ui-corner-top" style="height:16px;  padding: 2px 6px; cursor: move;">
+				<span style="float: left;">User Info.</span>
+				<a style="float: right;" href="#" id="close"><span class="ui-icon ui-icon-close"/></a>
+			</div>
+			<div class="ui-widget-content ui-corner-bottom" style="height:220px;overflow: hidden;">
+				<div id="portrait-container">
+				<div id="portrait">
+				<s:if test="#request.userInformation == null">		
+				<img src="images/no-photo.gif"/>
+				</s:if>
+				<s:else>
+				<img src='<s:url value="/commons/getattachment.do"/>?userInfoIdForPortrait=<s:property value="#request.userInformation.id"/>'></img>
+				</s:else>
+				</div>
+				</div>
+				<div style="float: left; height: auto; width: 280px; margin: 2px;word-break:break-all;">
+					<p><b>Name:</b><span id="name" style="padding-left:10px"></span></p>
+					<p><b>Attend Time:</b><span id="createTime" style="padding-left:10px"></span></p>
+					<p><b>Last Update Time:</b><span id="latestUpdateTime" style="padding-left:10px"></span></p>
+					<p><b>Habbit:</b><span id="habbit" style="padding-left:10px"></span></p>
+					<p><b>Description:</b><span id="description" style="padding-left:10px;"></span></p>
+				</div>
+			</div>
 		</div>
 		<iframe src="/commons/attach_result.jsp" id="hiddenIframe"  name="hiddenIframe" style="display: none;"></iframe>		
 	</body>

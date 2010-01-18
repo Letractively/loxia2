@@ -6,6 +6,7 @@
 		<property name="userInformationManager" ref="userInformationManager"/>
 		<property name="userInformationDao" ref="userInformationDao"/>
 		<property name="userMemoDao" ref="userMemoDao"/>
+		<property name="userDao" ref="userDao"/>
 	</bean>
 	<bean id="userMaintainAction" class="cn.benjamin.loxia.examples.action.UserMaintainAction" scope="request">	
 		<property name="userDao" ref="userDao"/>
