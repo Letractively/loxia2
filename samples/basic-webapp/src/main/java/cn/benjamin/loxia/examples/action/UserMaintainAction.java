@@ -84,13 +84,18 @@ public class UserMaintainAction extends BaseProfileAction {
 	@DataResponse
 	public String addUser() throws Exception{		
 		user.setId(null);
-		userInformation.setId(null);
+		
 		ou.setId(1l);
 		user.setOu(ou);
-		userInformation.setUser(user);
+		
 		user.setCreateTime(DateUtil.now());
 		user = userDao.save(user);
-		userInformationManager.saveOrUpdate(userInformation);
+		if(!"".equals(userInformation.getDescription()))
+		{
+			userInformation.setId(null);
+			userInformation.setUser(user);
+			userInformationManager.saveOrUpdate(userInformation);
+		}
 		Map<String,Object> result = new HashMap<String, Object>();
 		result.put("result", true);
 		request.put("json", new JSONObject(result));
