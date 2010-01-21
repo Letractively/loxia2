@@ -57,7 +57,6 @@ public class DesktopAction extends BaseProfileAction implements SessionAware{
 	@Override
 	public String execute() throws Exception{
 		
-		
 		UsersTableModel userTableModel = new UsersTableModel();
 		userTableModel.setUserInformationDao(userInformationDao);
 		userTableModel.setItemPerPage(10);

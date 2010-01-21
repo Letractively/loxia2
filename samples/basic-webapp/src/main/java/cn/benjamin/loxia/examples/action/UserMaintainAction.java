@@ -1,24 +1,28 @@
 package cn.benjamin.loxia.examples.action;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import cn.benjamin.loxia.examples.dao.UserDao;
 import cn.benjamin.loxia.examples.dao.UserInformationDao;
 import cn.benjamin.loxia.examples.dao.UserMemoDao;
+import cn.benjamin.loxia.examples.dao.UserRoleDao;
 import cn.benjamin.loxia.examples.manager.UserInformationManager;
 import cn.benjamin.loxia.examples.manager.UserManager;
 import cn.benjamin.loxia.examples.manager.UserMemoManager;
 import cn.benjamin.loxia.examples.model.UserInformation;
 import cn.benjamin.loxia.examples.model.UserMemo;
 import cn.benjamin.loxia.model.OperatingUnit;
+import cn.benjamin.loxia.model.Privilege;
+import cn.benjamin.loxia.model.Role;
 import cn.benjamin.loxia.model.User;
+import cn.benjamin.loxia.model.UserRole;
 import cn.benjamin.loxia.support.image.ImageResizer;
 import cn.benjamin.loxia.support.json.JSONObject;
 import cn.benjamin.loxia.utils.DateUtil;
@@ -28,7 +32,6 @@ import cn.benjamin.loxia.utils.PropertyUtil;
 import cn.benjamin.loxia.web.BaseProfileAction;
 import cn.benjamin.loxia.web.annotation.Acl;
 import cn.benjamin.loxia.web.annotation.DataResponse;
-import cn.benjamin.loxia.utils.DateUtil;
 
 public class UserMaintainAction extends BaseProfileAction {
 
@@ -55,6 +58,7 @@ public class UserMaintainAction extends BaseProfileAction {
 	private UserMemoManager userMemoManager;
 	private UserInformationDao userInformationDao;
 	private UserInformationManager userInformationManager;
+	private UserRoleDao userRoleDao;
 	
 	@SuppressWarnings("unchecked")
 	private void prepareForTodoListMaintain(){
@@ -83,14 +87,30 @@ public class UserMaintainAction extends BaseProfileAction {
 	@SuppressWarnings("unchecked")
 	@DataResponse
 	public String addUser() throws Exception{		
-		user.setId(null);
 		
+		user.setId(null);
 		ou.setId(1l);
-		user.setOu(ou);
+		//if user is a system user then add a new UserRole and mapping to Role 1  and save the new created userRole 
+		if(user.getIsSystem())
+		{
+			List userRoles=new ArrayList();
+			UserRole ur=new UserRole();
+			Role role=new Role();
+			role.setId(1l);
+			ur.setUser(user);
+			ur.setRole(role);
+			ur.setOu(ou);
+			userRoles.add(ur);
+			user.setUserRoles(userRoles);
+			user.setOu(ou);
+			ur=userRoleDao.save(ur);
+		}
+		//upper is the add new userrole logic.
 		
 		user.setCreateTime(DateUtil.now());
 		user = userDao.save(user);
-		if(!"".equals(userInformation.getDescription()))
+		
+		if(!"".equals(userInformation.getDescription().trim()))
 		{
 			userInformation.setId(null);
 			userInformation.setUser(user);
@@ -305,5 +325,13 @@ public class UserMaintainAction extends BaseProfileAction {
 	public void setUserInformationManager(
 			UserInformationManager userInformationManager) {
 		this.userInformationManager = userInformationManager;
+	}
+
+	public UserRoleDao getUserRoleDao() {
+		return userRoleDao;
+	}
+
+	public void setUserRoleDao(UserRoleDao userRoleDao) {
+		this.userRoleDao = userRoleDao;
 	}
 }
