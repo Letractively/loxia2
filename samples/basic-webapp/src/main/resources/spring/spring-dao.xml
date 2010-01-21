@@ -9,4 +9,5 @@
 		<loxia:dao id="userDao" interface="cn.benjamin.loxia.examples.dao.UserDao"/>
 		<loxia:dao id="userInformationDao" interface="cn.benjamin.loxia.examples.dao.UserInformationDao"/>
 		<loxia:dao id="userMemoDao" interface="cn.benjamin.loxia.examples.dao.UserMemoDao"/>
+		<loxia:dao id="userRoleDao" interface="cn.benjamin.loxia.examples.dao.UserRoleDao"/>
 </beans>
