@@ -86,6 +86,7 @@
 		   				 }},
 	   					{value:"Upload", 
 			   			 func : function(){
+				   			
    			 				$j("#uploadForm").submit();
    			 				$j('#up-portrait-dlg').loxiadialog("close");
 		   			 	 }}]
@@ -155,7 +156,10 @@
 				<table cellpadding="2" cellspacing="2" border="0" style="width: 100%;">
 					<tr class="odd">
 						<td class="label" style="text-align: right; padding-right: 4px;" width="100px">Login Name:</td>
-						<td width="120px"><s:property value="user.loginName"/><input type="hidden" id="user.id" name="user.id" value='<s:property value="user.id"/>' />
+						<td width="120px">
+								<s:property value="user.loginName"/>
+								<input type="hidden" id="user.id" name="user.id" value='<s:property value="user.id"/>' />
+								<input type="file" name="portrait" class="ui-state-default" style="display: none;"/>
 										 
 						</td>
 						<td class="hint"></td>

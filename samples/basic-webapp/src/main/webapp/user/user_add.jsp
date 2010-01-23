@@ -54,7 +54,7 @@
 			function checkLoginName(value,obj)
 			{
 				
-				 var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[\-_]){6,20}$/;  
+				 var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[\-_]){1,20}$/;  
 				 if (!patrn.exec(value)) return 'Unacceptable login name,just accept a-Z,0-9,-,_';
 				 return loxia.SUCCESS; 
 			}
@@ -62,7 +62,7 @@
 			function checkLength(value, obj){
 				if(value.length > 20)
 					return "please keep your length less-than 20";
-				if(obj.name="user.password" && value.length <6 )
+				if(obj.name=="user.password" && value.length <6 )
 					return "password length must greater-than 6"
 				return loxia.SUCCESS;
 			}
