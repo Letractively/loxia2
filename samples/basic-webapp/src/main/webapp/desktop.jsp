@@ -280,7 +280,7 @@
 					<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
 						<div id="portrait-container">
 						<div id="portrait">
-						<s:if test="#request.userInformation == null">
+						<s:if test="#request.userInformation == null or #request.userInformation.portrait == null">
 						<img src='<s:url value="/images/no-photo.gif"/>'/>
 						</s:if>
 						<s:else>
