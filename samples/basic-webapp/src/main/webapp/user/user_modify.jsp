@@ -137,11 +137,43 @@
 				return reg.test(str);   
 			}
 
+			function checkPassword(value,obj)
+			{
+				 var a=true;
+				 
+				 var patrn=/[x000-x255]*$/;  
+				  if (!patrn.exec(value))
+				  {
+				   a=false;
+				  }
+	
+				  patrn=/\d+$/; 
+				  if (!patrn.exec(value))
+				  {
+					  a=false;  
+				  }
+				  patrn=/\w+$/; 
+				  if (!patrn.exec(value))
+				  {
+					  a=false;  
+				  }
+
+				  if(!a)
+				  return 'Unacceptable login name,just accept a-Z,0-9,-,_';
+				  
+				 return loxia.SUCCESS; 
+			}
+
 			function checkLength(value, obj){
 				if(value.length > 20)
 					return "please keep your length less-than 20";
-				if(obj.name="user.password" && value.length <6 )
+				if(value.length <6 )
 					return "password length must greater-than 6"
+				return loxia.SUCCESS;
+			}
+			function checkLength1(value, obj){
+				if(value.length > 20)
+					return "please keep your length less-than 20";
 				return loxia.SUCCESS;
 			}
 		</script>
@@ -167,7 +199,7 @@
 							<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
 								<div id="portrait-container">
 								<div id="portrait">
-									<s:if test="userInformation.portrait == null">
+									<s:if test="userInformation == null or userInformation.portrait == null">
 									<img src='<s:url value="/images/no-photo.gif"/>'/>
 									</s:if>
 									<s:else>
@@ -181,7 +213,7 @@
 					</tr>
 					<tr class="even">
 						<td class="label" style="text-align: right; padding-right: 4px;">Password:</td>
-						<td width="120px"><input loxiaType="input" name="user.password"  trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength"/></td>
+						<td width="120px"><input loxiaType="input" name="user.password"  trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength,checkPassword"/></td>
 						<td class="hint">change the password or leave it alone if not.</td>
 						
 					</tr>
