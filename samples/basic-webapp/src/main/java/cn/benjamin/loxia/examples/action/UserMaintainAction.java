@@ -89,7 +89,9 @@ public class UserMaintainAction extends BaseProfileAction {
 	public String addUser() throws Exception{		
 		
 		user.setId(null);
+		user.setCreateTime(DateUtil.now());
 		ou.setId(1l);
+		user.setOu(ou);
 		//if user is a system user then add a new UserRole and mapping to Role 1  and save the new created userRole 
 		if(user.getIsSystem())
 		{
@@ -102,13 +104,14 @@ public class UserMaintainAction extends BaseProfileAction {
 			ur.setOu(ou);
 			userRoles.add(ur);
 			user.setUserRoles(userRoles);
-			user.setOu(ou);
+			user = userDao.save(user);
 			ur=userRoleDao.save(ur);
+			
 		}
-		//upper is the add new userrole logic.
-		
-		user.setCreateTime(DateUtil.now());
-		user = userDao.save(user);
+		else
+		{
+			user = userDao.save(user);
+		}
 		
 		if(!"".equals(userInformation.getDescription().trim()))
 		{
