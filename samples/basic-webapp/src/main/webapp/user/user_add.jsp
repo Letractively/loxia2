@@ -17,7 +17,7 @@
 					return loxia.SUCCESS;
 				if(data.exception)
 					return "System Error";
-				return "Input is used, please change another one.";
+				return "Name is used, please choose another one.";
 			}
 			function addUser(){
 				showErrorMsg("");
@@ -59,11 +59,43 @@
 				 return loxia.SUCCESS; 
 			}
 
+			function checkPassword(value,obj)
+			{
+				 var a=true;
+				 
+				 var patrn=/[x000-x255]*$/;  
+				  if (!patrn.exec(value))
+				  {
+				   a=false;
+				  }
+	
+				  patrn=/\d+$/; 
+				  if (!patrn.exec(value))
+				  {
+					  a=false;  
+				  }
+				  patrn=/\w+$/; 
+				  if (!patrn.exec(value))
+				  {
+					  a=false;  
+				  }
+
+				  if(!a)
+				  return 'Unacceptable login name,just accept a-Z,0-9,-,_';
+				  
+				 return loxia.SUCCESS; 
+			}
+
 			function checkLength(value, obj){
 				if(value.length > 20)
 					return "please keep your length less-than 20";
-				if(obj.name=="user.password" && value.length <6 )
+				if(value.length <6 )
 					return "password length must greater-than 6"
+				return loxia.SUCCESS;
+			}
+			function checkLength1(value, obj){
+				if(value.length > 20)
+					return "please keep your length less-than 20";
 				return loxia.SUCCESS;
 			}
 		</script>
@@ -78,12 +110,12 @@
 				<table cellpadding="2" cellspacing="2" border="0" style="width: 100%;">
 					<tr class="odd">
 						<td class="label" style="text-align: right; padding-right: 4px;" width="100px">Login Name:</td>
-						<td width="120px"><input loxiaType="input" name="user.loginName" required="true" trim="true" selectonfocus="true"  checkmaster="checkUserUnique,checkLength,checkLoginName" style="width:95%"/></td>
+						<td width="120px"><input loxiaType="input" name="user.loginName" required="true" trim="true" selectonfocus="true"  checkmaster="checkUserUnique,checkLength1,checkLoginName" style="width:95%"/></td>
 						<td class="hint">Choose one login name which should be unique in system.</td>
 					</tr>
 					<tr class="even">
 						<td class="label" style="text-align: right; padding-right: 4px;">Password:</td>
-						<td width="120px"><input loxiaType="input" name="user.password" required="true" trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkLength"/></td>
+						<td width="120px"><input loxiaType="input" name="user.password" required="true" trim="true" selectonfocus="true"  style="width:95%" checkmaster="checkPassword,checkLength"/></td>
 						<td class="hint">Set the initial password</td>
 					</tr>
 					<tr class="odd">
