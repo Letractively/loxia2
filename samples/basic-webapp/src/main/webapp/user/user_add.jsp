@@ -61,26 +61,23 @@
 
 			function checkPassword(value,obj)
 			{
-				 var a=true;
-				 
-				 var patrn=/[x000-x255]*$/;  
+				  var a=true;
+				  var patrn=/[x000-x255]*/;  
 				  if (!patrn.exec(value))
 				  {
 				   a=false;
 				  }
-	
-				  patrn=/\d+$/; 
+				  patrn=/\d+/; 
 				  if (!patrn.exec(value))
 				  {
 					  a=false;  
 				  }
-				  patrn=/\w+$/; 
+				  patrn=/[a-zA-Z]+/; 
 				  if (!patrn.exec(value))
 				  {
 					  a=false;  
 				  }
-
-				  if(!a)
+			      if(!a)
 				  return 'Unacceptable login name,just accept a-Z,0-9,-,_';
 				  
 				 return loxia.SUCCESS; 
