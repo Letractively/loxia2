@@ -8,3 +8,7 @@ table .odd { background-color: #fff; }
 .hint {font-size: 7pt; color:#0070A3;}
 .buttonbar {margin: 4px 2px; padding-top: 4px; border-top: 1px solid; border-color: #aed0ea; text-align: center;}
 .buttonbar input, .buttonbar button {margin: 0 2px;}
+
+/*-----------------popup-------------------------------------*/
+.popup{font-size:12px;display:none;position:fixed;z-index:999;left:50%;top:30%;width:480px;margin-left:-246px;}
+.popup h5{font-size:12px;color:#0555A5;line-height:20px;}

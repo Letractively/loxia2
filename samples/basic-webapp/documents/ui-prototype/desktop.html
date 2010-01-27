@@ -25,6 +25,20 @@
 			
 			$j(document).ready(function(){
 				loxia.init({debug: true});
+				
+				$j(".popup").draggable({
+	                handle: '.ui-dialog-titlebar',
+	                containment: 'document'
+	            });
+				$j(".popup").bgiframe();
+				
+				$j(".popup a.ui-dialog-titlebar-close").hover(function(){
+					$j(this).addClass("ui-state-hover");
+				},function(){
+					$j(this).removeClass("ui-state-hover");
+				}).click(function(){
+					$j(this).parents(".popup").hide();
+				});	            
 			});	
 		</script>
 
@@ -39,6 +53,10 @@
 			#portrait-container.show #portrait-uploader{background-color: #EBEBEB;}
 			#portrait-uploader img{cursor: pointer; font-size:11px;display:none;float:right;width:20px;margin-right:5px;line-height:18px;text-indent:-800px;}
 			#portrait-container.show #portrait-uploader img{display:block;}
+			#personal-info {font-size: 8pt;}
+			#personal-info td {padding-left: 6px;}
+			#personal-info td.label{padding-left:0px;}
+			#personal-info div{margin: 4px; color:#0070A3; font-family:"Arial"; font-style: italic;}
 			.content .loxia{font-size: 80%;}
 			.content .ui-loxia-table tr{height: 22px;}
 			.content .ui-loxia-table th, .content .ui-loxia-table th{line-height: 22px;}
@@ -159,7 +177,7 @@
 				$j('#delete-user-dlg').loxiadialog("open");
 			}
 			function viewUserInfo(userId){
-//				$j('#user-info-drag').loxiadraggable("open");
+				$j('#user-info-popup').show();
 			}
 			function editTodoList(){
 				var oWin = loxia.openPage('/basicwebapp/user/maintaintodolistentry.do?acl=ACL_USERMEMO_MAINTAIN','useraddtodowindow',null,[640,400]);
@@ -218,22 +236,22 @@
 					</div>
 					<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
 						<div id="portrait-container">
-						<div id="portrait">
-						<img src="images/no-photo.gif"/ >
+							<div id="portrait"><img src="images/no-photo.gif"/></div>
+							<div id="portrait-uploader"><img src="images/newspaper.png"/></div>
 						</div>
-						<div id="portrait-uploader"><img src="images/newspaper.png"/></div>
-						</div>
-						<div>
-							Name:<br/>
-							Attend Time:<br/>
-							Last Updated Time:<br/>
-							Habbit:
-						</div>
-						<hr>
+						<div id="personal-info">
+							<table cellpadding="2" cellspacing="2">
+								<tr><td class="label">Name:</td></tr><tr><td>Sunny</td></tr>
+								<tr><td class="label">Attend Time:</td></tr><tr><td>2009-10-10</td></tr>
+								<tr><td class="label">Last Updated Time:</td></tr><tr><td>2010-01-02</td></tr>
+								<tr><td class="label">Habbit:</td></tr><tr><td>Hiking, Swimming</td></tr>
+							</table>
+							<div>&nbsp;&nbsp;&nbsp;&nbsp;This guy has a lot of things to say and all these things are mentioned here. You have to write down them and report it to anyone who has intreast on it and if you don't do this, he will go to your home and hit your head with his beautiful hammer.</div>
+						</div>						
 					</div>					
 				</div>
-				<div class="clearer"><span></span></div>
-			</div>			
+				<div class="clearer"><span></span></div>			
+			</div>
 		</div>
 		<div class="footer">&copy; 2006 <a href="#">Aixol.com</a>. 
 		</div>
@@ -245,8 +263,25 @@
 		<div loxiaType="dialog" settings="deleteUserDlgSettings" id="delete-user-dlg" title="Confirm Dialog">
 			<p>Do you confirm to remove this user? User will not be recoved after deletion.</p>
 		</div>
-		<div loxiaType="draggable" id="user-info-drag">
-			<p>User Info.</p>
+		<div id="user-info-popup" class="popup">
+			<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable">
+			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+				<span class="ui-dialog-title">User Info</span>
+		        <a class="ui-dialog-titlebar-close ui-corner-all" href="#" role="button" unselectable="on" style="-moz-user-select: none;">
+					<span class="ui-icon ui-icon-closethick" unselectable="on" style="-moz-user-select: none;">close</span>
+				</a>
+	        </div>
+	        <div class="ui-dialog-content ui-widget-content">
+				<div class="ui-widget ui-widget-content ui-corner-bottom" style="overflow: hidden;">
+					<img src="images/no-photo.gif" style="float:left;"/>					
+					<div>
+						Name:<br/>
+						Attend Time:<br/>
+						Last Updated Time:<br/>
+						Habbit:
+					</div>
+				</div>
+			</div>
 		</div>
 		<iframe src="/commons/attach_result.jsp" id="hiddenIframe"  name="hiddenIframe" style="display: none;"></iframe>		
 	</body>
