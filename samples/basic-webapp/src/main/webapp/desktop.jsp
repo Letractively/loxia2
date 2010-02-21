@@ -248,8 +248,7 @@
 				</table>
 				</div>
 				<p></p>
-				<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Current User List</span>
-				kk:<s:property value="checkAcl(new java.lang.String[]{'ACL_USER_MAINTAIN'})"/>
+				<div class="ui-state-active ui-corner-top" style="height:16px; margin-bottom: 1px; padding: 2px 6px"><span style="float:left;">Current User List</span>				
 				<s:if test="checkAcl(new java.lang.String[]{'ACL_USER_MAINTAIN'})">
 				<a class="rtmenu" title="Add new users here" href="#" onclick="addUser();return false;" style="float: right;"><span style="background: url('images/plus.png') right bottom no-repeat;">New User</span></a>
 				</s:if>
