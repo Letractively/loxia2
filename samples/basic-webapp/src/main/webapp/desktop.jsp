@@ -69,7 +69,7 @@
 						}
 					}else if(aId == "close"){
 						$j(this).find(".ui-icon-circle-close").removeClass("ui-icon-circle-close").addClass("ui-icon-close");
-						$j('#user-info-drag').center().hide('clip',null,500,null);
+						$j('#user-info-drag').hide('clip',null,500,null);
 					}
 				});
 				$j("#portrait-container").hover(function(){
@@ -196,7 +196,7 @@
 				$j('#habbit').text(data.habbit);
 				$j('#description').text(data.description);
 				if($j('#user-info-drag').css('display') == 'none')
-					$j('#user-info-drag').show('clip',null,500,null);		
+					$j('#user-info-drag').center().show('clip',null,500,null);		
 			}
 			function editHabbit(value){
 				if(value != "" && value.length > 0){
@@ -317,9 +317,9 @@
 			</form>
 		</div>		
 		<div id="user-info-drag" class="sidenav">
-			<div class="ui-state-active ui-corner-top" style="height:16px;  padding: 2px 6px; cursor: move;">
+			<div class="ui-state-active ui-corner-top" style="height:16px; padding: 2px 6px; cursor: move;">
 				<span style="float: left;">User Info.</span>
-				<a style="float: right;" href="#" id="close"><span class="ui-icon ui-icon-close"/></a>
+				<a style="float: right;" href="#" id="close"><span class="ui-icon ui-icon-close"></span></a>
 			</div>
 			<div class="ui-widget-content ui-corner-bottom" style="height:220px;overflow: hidden;">
 				<div id="portrait-container">
