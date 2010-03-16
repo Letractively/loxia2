@@ -7,6 +7,12 @@
   <version>1.0-SNAPSHOT</version>
   <name>basic-webapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <repositories>
+  	<repository>
+  		<id>loxia</id>
+  		<url>http://loxia2.googlecode.com/svn/repository</url>
+  	</repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>cn.benjamin.loxia2</groupId>
