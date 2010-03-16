@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns="http://ehcache.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ehcache.org http://ehcache.org/ehcache.xsd">
+	<diskStore path="java.io.tmpdir"/>
+	<defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="true"
+            maxElementsOnDisk="10000000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            />
+	<cache name="cn.benjamin.loxia.model.Privilege" maxElementsInMemory="300" eternal="true" overflowToDisk="false"/>
+</ehcache>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+<session-factory>
+      <property name="show_sql">true</property>
+      <property name="dialect">cn.benjamin.loxia.examples.CustomHSQLDialect</property>
+      <property name="hibernate.hbm2ddl.auto">create-drop</property>
+      <property name="hibernate.jdbc.batch_size">100</property>
+      <property name="hibernate.cache.use_second_level_cache">true</property>
+      <property name="hibernate.cache.provider_class">org.hibernate.cache.SingletonEhCacheProvider</property>            
+      
+      <mapping class="cn.benjamin.loxia.model.OperatingUnit"/>
+      <mapping class="cn.benjamin.loxia.model.OperatingUnitType"/>
+      <mapping class="cn.benjamin.loxia.model.Privilege"/>
+      <mapping class="cn.benjamin.loxia.model.PrivilegeType"/>
+      <mapping class="cn.benjamin.loxia.model.Role"/>
+      <mapping class="cn.benjamin.loxia.model.User"/>
+      <mapping class="cn.benjamin.loxia.model.UserRole"/>
+      
+      <mapping class="cn.benjamin.loxia.examples.model.UserInformation"/>
+      <mapping class="cn.benjamin.loxia.examples.model.UserMemo"/>
+      
+      <mapping resource="META-INF/orm.xml"/>     
+      
+      <class-cache usage="read-only" class="cn.benjamin.loxia.model.Privilege"/> 
+</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,30 @@
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd"
+	version="1.0">
+	<named-query name="UserInformation.findUserInformationByUser">
+		<query><![CDATA[select ui from UserInformation ui where ui.user.id = :userId]]></query>
+	</named-query>
+	<named-query name="User.findByLoginName">
+		<query><![CDATA[select u from cn.benjamin.loxia.model.User u where u.loginName = :loginName]]></query>
+	</named-query>
+	<named-query name="User.deleteUserbyUserId">
+		<query><![CDATA[update cn.benjamin.loxia.model.User set isAvailable = 0 where id = :userId]]></query>
+	</named-query>
+	<named-query name="UserMemo.findUserMemosByUserIdAndDate">
+		<query><![CDATA[select um from UserMemo um where um.user.id = :userId and um.memoDate = :date order by um.id]]></query>
+	</named-query>	
+	<named-query name="UserMemo.deleteUserMemoByUserIdAndDate">
+		<query><![CDATA[delete from UserMemo um where um.user.id = :userId and um.memoDate = :date]]></query>
+	</named-query>
+	<sql-result-set-mapping name="userInfo">
+		<column-result name="ID"/>
+		<column-result name="LOGIN_NAME"/>
+		<column-result name="USER_NAME"/>
+		<column-result name="IS_SYSTEM"/>
+		<column-result name="UID"/>
+		<column-result name="HABBIT"/>
+		<column-result name="DESCRIPTION"/>
+		<column-result name="WITH_PORTRAIT"/>
+	</sql-result-set-mapping>
+</entity-mappings>
