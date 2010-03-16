@@ -2,11 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:sec="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	<sec:http entry-point-ref="authenticationEntryPoint">		
-		<sec:intercept-url pattern="/login.jsp" filters="none"/>
-		<sec:intercept-url pattern="/accessdenied.jsp" filters="none"/>
+		<sec:intercept-url pattern="/login" filters="none"/>
+		<sec:intercept-url pattern="/accessdenied" filters="none"/>
 		<sec:intercept-url pattern="/commons/**" filters="none"/>
 		<sec:intercept-url pattern="/css/**" filters="none"/>
 		<sec:intercept-url pattern="/images/**" filters="none"/>
@@ -19,19 +19,19 @@
 	    class="org.springframework.security.ui.webapp.AuthenticationProcessingFilter">
 	  <sec:custom-filter position="AUTHENTICATION_PROCESSING_FILTER"/>
 	  <property name="authenticationManager" ref="authenticationManager"/>
-	  <property name="authenticationFailureUrl" value="/accessdenied.jsp"/>
-	  <property name="defaultTargetUrl" value="/desktop.do"/>
+	  <property name="authenticationFailureUrl" value="/accessdenied"/>
+	  <property name="defaultTargetUrl" value="/desktop"/>
 	  <property name="filterProcessesUrl" value="/j_spring_security_check"/>
 	  <property name="exceptionMappings">
 	    <props>
-	      <prop key="org.springframework.security.BadCredentialsException">/login.jsp?error=true</prop>
+	      <prop key="org.springframework.security.BadCredentialsException">/login?error=true</prop>
 	    </props>
 	  </property>
 	</bean>
 	
 	<bean id="authenticationEntryPoint"
         class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
-        <property name="loginFormUrl" value="/login.jsp"/>
+        <property name="loginFormUrl" value="/login"/>
     </bean>
 	
   	<sec:authentication-manager alias="authenticationManager"/>      
