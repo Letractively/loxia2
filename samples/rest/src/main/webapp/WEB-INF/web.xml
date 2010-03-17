@@ -14,6 +14,12 @@
 			classpath*:spring.xml
 		</param-value>
 	</context-param>		
+	    
+	<!-- Spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>	
 	
 	<!-- URL Rewrite -->
 	<filter>
@@ -22,15 +28,9 @@
        
        <init-param>
 	      <param-name>logLevel</param-name>
-	      <param-value>DEBUG</param-value>
+	      <param-value>log4j</param-value>
 	   </init-param>
     </filter>
-    
-	<!-- Spring Security -->
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>	
    
 	<!-- Open Session in View -->
 	<filter>
@@ -38,17 +38,17 @@
 		<filter-class>
 			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
 		</filter-class>
-	</filter>	
-	
-	<filter-mapping>
-       <filter-name>UrlRewriteFilter</filter-name>
-       <url-pattern>/*</url-pattern>
-    </filter-mapping>
+	</filter>		
     
     <filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>	
+	
+	<filter-mapping>
+       <filter-name>UrlRewriteFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
 	
 	<filter-mapping>
 		<filter-name>sessionFilter</filter-name>
@@ -61,11 +61,9 @@
 	<listener>
 	    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-	<!-- 
 	<listener>
 	    <listener-class>cn.benjamin.loxia.web.InitConfigurationListener</listener-class>
 	</listener>
-	 -->
 	 
 	<servlet>
         <servlet-name>spring</servlet-name>
