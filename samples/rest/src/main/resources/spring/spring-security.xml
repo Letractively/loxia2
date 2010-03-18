@@ -30,7 +30,7 @@
 	</bean>
 	
 	<bean id="authenticationEntryPoint"
-        class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+        class="cn.benjamin.loxia.security.LoxiaAjaxAwareFormAuthenticationEntryPoint">
         <property name="loginFormUrl" value="/login"/>
     </bean>
 	
