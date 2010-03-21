@@ -15,5 +15,6 @@
 	<body>
 		<p>Exception:</p>
 		<p>${exception.errorCode}</p>
+		<p>${exception.message}</p>
 	</body>
 </html>

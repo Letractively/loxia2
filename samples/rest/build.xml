@@ -3,7 +3,7 @@
 	<property file="build.properties"/>
 	<property name="classes.dir" value="${basedir}/target/classes"/>
 	<property name="resources.dir" value="${basedir}/src/main/resources"/>
-	
+	<property name="messages.dir" value="${basedir}/messages"/>
 	<property name="deploy.home" value="${appserver.home}/webapps/rest"/>
 	
 	<path id="maven-ant-tasks.classpath" path="${basedir}/lib/ant/maven-ant-tasks-2.0.10.jar" />
@@ -51,8 +51,10 @@
 		</copy>
 	</target>
 	
-	<target name="copyResources">		
-		<mkdir dir="${deploy.home}/WEB-INF/classes"/>
+	<target name="copyResources">	
+		<mkdir dir="${deploy.home}/WEB-INF/classes/messages"/>
+		<native2ascii encoding="UTF-8" src="${messages.dir}" dest="${deploy.home}/WEB-INF/classes/messages"
+					includes="**/*.properties"/>		
 		<copy todir="${deploy.home}/WEB-INF/classes">
 		  <fileset dir="${resources.dir}"/>
 		</copy>
@@ -64,6 +66,6 @@
 		</copy>
 	</target>
 	
-	<target name="deploy" depends="copyClass, copyJsp"/>
+	<target name="deploy" depends="copyClass, copyResources, copyJsp"/>
 	<target name="deployFull" depends="copyLibWithPrep,copyClass, copyJsp"/>	
 </project>
