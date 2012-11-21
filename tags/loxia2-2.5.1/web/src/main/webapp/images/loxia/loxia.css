@@ -1,0 +1,189 @@
+.loxia {
+}
+
+.loxiaInput,
+.loxiaTextarea{
+	border:1px solid #ccc;
+}
+
+.loxiaInputFocused,
+.loxiaTextareaFocused{
+	border:1px solid #000;
+}
+	
+.loxiaInputRequired,
+.loxiaTextareaRequired {
+	background-color: #ffff99;
+}
+
+.loxiaSelectRequired {
+}
+
+.loxiaInputError,
+.loxiaTextareaError{
+	border:1px solid #ff3300;
+}
+
+.loxiaTooltip
+{
+	z-index: auto;
+	display: none;
+	position:absolute;	
+	overflow: hidden;
+	text-indent: 5px;
+	line-height: 20px;
+	font-size: 12px;
+	font-family: Arial;
+	opacity:0.9;
+    filter: alpha(opacity=90);
+}
+
+/*
+*
+* LoxiaTip
+*
+*/
+.loxiatip
+{
+	position: absolute;
+	z-index: 50;
+	border-collapse: collapse;
+}
+.loxiatip td.tip-topleft
+{
+	background: transparent url(bubbletip.png) no-repeat scroll 0px 0px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-TL-corner.png', sizingMethod='crop');
+	height: 33px;
+	width: 33px;
+}
+.loxiatip td.tip-top
+{
+	background: transparent url(bubbletip-T-B.png) repeat-x scroll 0px 0px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-T.png', sizingMethod='scale');
+	height: 33px;
+}
+.loxiatip td.tip-topright
+{
+	background: transparent url(bubbletip.png) no-repeat scroll -73px 0px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-TR-corner.png', sizingMethod='crop');
+	height: 33px;
+	width: 33px;
+}
+.loxiatip td.tip-left-tail div.tip-left, .loxiatip td.tip-left
+{
+	background: transparent url(bubbletip-L-R.png) repeat-y scroll 0px 0px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-L.png', sizingMethod='scale');
+	width: 33px;
+}
+.loxiatip td.tip-left-tail div.tip-left-tail
+{
+	background: transparent url(bubbletip.png) no-repeat scroll 0px -33px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-L-tail.png', sizingMethod='scale');
+	width: 33px;
+	height: 40px;
+}
+.loxiatip td.tip-right-tail div.tip-right, .loxiatip td.tip-right
+{
+	background: transparent url(bubbletip-L-R.png) repeat-y scroll -33px 0px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-R.png', sizingMethod='scale');
+	width: 33px;
+}
+.loxiatip td.tip-right-tail div.tip-right-tail
+{
+	background: transparent url(bubbletip.png) no-repeat scroll -73px -33px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-R-tail.png', sizingMethod='scale');
+	width: 33px;
+	height: 40px;
+}
+.loxiatip td.tip-bottomleft
+{
+	background: transparent url(bubbletip.png) no-repeat scroll 0px -73px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-BL-corner.png', sizingMethod='crop');
+	height: 33px;
+	width: 33px;
+}
+.loxiatip td.tip-bottom
+{
+	background: transparent url(bubbletip-T-B.png) repeat-x scroll 0px -33px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-B.png', sizingMethod='scale');
+	height: 33px;
+}
+.loxiatip td.tip-bottomright
+{
+	background: transparent url(bubbletip.png) no-repeat scroll -73px -73px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-BR-corner.png', sizingMethod='crop');
+	height: 33px;
+	width: 33px;
+}
+.loxiatip table.tip-top, .loxiatip table.tip-bottom
+{
+	width: 100%;
+}
+.loxiatip table.tip-top th
+{
+	width: 50%;
+	background: transparent url(bubbletip-T-B.png) repeat-x scroll 0px 0px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-T.png', sizingMethod='scale');
+}
+.loxiatip table.tip-bottom th
+{
+	width: 50%;
+	background: transparent url(bubbletip-T-B.png) repeat-x scroll 0px -33px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-B.png', sizingMethod='scale');
+}
+.loxiatip table.tip-top td div
+{
+	background: transparent url(bubbletip.png) no-repeat scroll -33px 0px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-T-tail.png', sizingMethod='crop');
+	width: 40px;
+	height: 33px;
+}
+.loxiatip table.tip-bottom td div
+{
+	background: transparent url(bubbletip.png) no-repeat scroll -33px -73px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='bubbletip-B-tail.png', sizingMethod='crop');
+	width: 40px;
+	height: 33px;
+}
+.loxiatip td.tip-content
+{
+	background-color: #fff;
+}
+
+.loxiatable { padding: 0px; margin: -1px 0px; border-collapse: collapse; width: 100%; border: 0px solid #dedede; overflow: hidden; }
+.loxiatable td, .loxiatable th { line-height: 26px; color: #666; text-align: left;}
+.loxiatable th { white-space: nowrap; color: #666; cursor: pointer; text-indent: 5px; border-width: 1px 0px 0px 0px; border-style: solid; border-color: #efefef; border-collapse: collapse; background: url(th-bg.gif) bottom left repeat-x #f9f9f9; }
+	.loxiatable th.sorted { }
+
+.loxiatable tr { border-collapse: collapse; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #ebebeb; }
+.loxiatable td { border-right: 0px solid #dedede; padding: 0px 5px; }
+
+.loxiatable .even { background-color: #eef2ff; /*eef2ff*/ }
+.loxiatable .odd { background-color: #fff; }
+.loxiatable tr.hover { background-color: #f3f1f1; }
+.loxiatable th.hover { border-bottom: 1px solid #aaccf6; background: url(th-hover-bg.gif) bottom left repeat-x #ebf3fd; color: #17294c; }
+	.loxiatable th.hover div { }
+	.loxiatable th div { background: url(unsorted.gif) 100% 50% no-repeat; width: auto; }
+	.loxiatable th.sort-asc { background: url(th-sort-bg.gif) bottom left repeat-x #fff9dd !important; border-color: #e8e467; color: #000 !important; }
+		.loxiatable th.sort-asc div { background-image: url(sort-asc.gif); }
+	.loxiatable th.sort-desc { background: url(th-sort-bg.gif) bottom left repeat-x #fff9dd !important; border-color: #e8e467; color: #000 !important; }
+		.loxiatable th.sort-desc div { background-image: url(sort-desc.gif); }
+	.loxiatable th.nosort div { background: transparent; cursor: default; }
+.loxiatable tr.selected { /*background: #daeaff !important;*/ background: #daeaff; /*daeaff*/ border-color: #e5eff7; }
+.loxiatable tr.selected td { }
+.loxiatable tr.selected td, .loxiatable tr.selected td a {}
+
+.loxiatable tfoot tr {color: #555; background: url(pager-bg.gif) bottom left repeat-x #666; height: 30px; border: 1px solid #d7d7d7;}
+
+.loxiatable .ltToolbar { color: #555; position: relative; width: auto; margin-left: -1px; font-size: 11px; line-height: 20px; background: url(pager-bg.gif) bottom left repeat-x #666; height: 30px; border: 1px solid #d7d7d7; }
+.loxiatable .ltToolbar .inner { position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; }
+.loxiatable .ltToolbar .imgWrap { border: 1px solid transparent; }
+.loxiatable .ltToolbar .imgWrap img { float: left; padding: 1px; border-width: 1px 0px 0px 1px; border-style: solid; border-color: transparent; cursor: pointer; }
+.loxiatable .ltToolbar .imgWrapHover { border: 1px solid #bbb; }
+.loxiatable .ltToolbar .imgWrapHover img { border-color: #fff !important; border-style: solid; border-width: 1px 0px 0px 1px; }
+.loxiatable .ltToolbar div { float: left; }
+.loxiatable .ltToolbar .separator { height: 20px; margin: 0px 6px; border-left: 1px solid #aaa; border-right: 1px solid #fff; }
+
+.loxiatable .ltToolbar .manipulation input {float: left;}
+.loxiatable .ltToolbar .pageInput { width: 2em; text-align: right; padding-right: 1px}
+.loxiatable .ltToolbar .perPage { }
