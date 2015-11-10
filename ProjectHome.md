@@ -1,0 +1,1 @@
+This development platform is derived from 'loxia' which is not posted publicly and many core architectures will be refactored to simplify the configuration and development work.
